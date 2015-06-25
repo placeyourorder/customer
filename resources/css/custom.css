@@ -1,0 +1,6 @@
+/* Sencha Overrides */
+.x-data-item {
+    background: #ddd;
+    padding: 1em;
+    border-bottom: 1px solid #ccc;
+}
