@@ -18,26 +18,32 @@ Ext.application({
   ],
 
   controllers: [
-    'Pyo.customer.controller.StoreListController',
-    'Pyo.customer.controller.StoreDetailsController'
+    //'Pyo.customer.controller.StoreListController',
+    'Pyo.customer.controller.ItemListController',
+    'Pyo.customer.controller.CartController',
+    'Pyo.customer.controller.OrderListController'
   ],
 
   views: [
     'Pyo.customer.view.Main',
     'Pyo.customer.view.StoreListView',
-    'Pyo.customer.view.StoreDetailsView'
+    'Pyo.customer.view.ItemListView',
+    'Pyo.customer.view.CartView',
+    'Pyo.customer.view.OrderListView'
   ],
 
   models: [
     'Pyo.customer.model.StoreListModel',
-    'Pyo.customer.model.StoreDetailsModel',
-    'Pyo.customer.model.CartModel'
+    'Pyo.customer.model.ItemListModel',
+    'Pyo.customer.model.CartModel',
+    'Pyo.customer.model.OrderListModel'
   ],
 
   stores: [
     'Pyo.customer.store.StoreListStore',
-    'Pyo.customer.store.StoreDetailsStore',
-    'Pyo.customer.store.CartStore'
+    'Pyo.customer.store.ItemListStore',
+    'Pyo.customer.store.CartStore',
+    'Pyo.customer.store.OrderListStore'
   ],
 
   icon: {
@@ -64,18 +70,6 @@ Ext.application({
 
     // Initialize the main view
     //Ext.Viewport.add(Ext.create('Pyo.customer.view.Main'));
-    this.redirectTo('#stores');
-  },
-
-  onUpdated: function() {
-    Ext.Msg.confirm(
-      "Application Update",
-      "This application has just successfully been updated to the latest version. Reload now?",
-      function(buttonId) {
-        if (buttonId === 'yes') {
-          window.location.reload();
-        }
-      }
-    );
+    //this.redirectTo('#stores');
   }
 });

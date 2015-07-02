@@ -1,10 +1,10 @@
 /* 
 * @Author: renjithks
-* @Date:   2015-06-30 22:19:17
+* @Date:   2015-06-30 22:16:58
 * @Last Modified by:   renjithks
 * @Last Modified time: 2015-06-30 23:41:18
 */
-Ext.define('Pyo.customer.model.CartModel', {
+Ext.define('Pyo.customer.model.OrderModel', {
   extend: 'Ext.data.Model',
   config: {
     fields: ['store_id', 'address', 'total_price', {
@@ -13,7 +13,7 @@ Ext.define('Pyo.customer.model.CartModel', {
     }],
     hasMany: {
       model: 'LineItems',
-      name: 'lineItems'
+      name: 'line_items'
     },
     hasOne: {
       model: 'Address',
