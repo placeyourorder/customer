@@ -2,7 +2,7 @@
 * @Author: renjithks
 * @Date:   2015-06-30 23:36:38
 * @Last Modified by:   renjithks
-* @Last Modified time: 2015-07-03 00:10:04
+* @Last Modified time: 2015-07-04 20:12:20
 */
 Ext.define('Pyo.customer.controller.CartController', {
   extend: 'Ext.app.Controller',
@@ -60,8 +60,11 @@ Ext.define('Pyo.customer.controller.CartController', {
       lineItems.push({
         item_id: item.data.item_id,
         quantity: item.data.quantity,
+        name: item.data.name,
         variant: {
-          _id: item.getVariant().get('_id')
+          _id: item.getVariant().get('_id'),
+          uom: item.getVariant().get('uom'),
+          quantity: item.getVariant().get('quantity'),
         }
       });
     });

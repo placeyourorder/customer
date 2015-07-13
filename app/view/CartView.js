@@ -2,7 +2,7 @@
 * @Author: renjithks
 * @Date:   2015-06-29 15:24:03
 * @Last Modified by:   renjithks
-* @Last Modified time: 2015-06-30 23:41:17
+* @Last Modified time: 2015-07-09 01:02:28
 */
 Ext.define('Pyo.customer.view.CartView', {
   extend: 'Ext.Panel',
@@ -42,9 +42,9 @@ Ext.define('Pyo.customer.view.CartView', {
   },
 
   updateData: function(data) {
+    this.callParent(arguments);
     this.down('#list').setStore(data.lineItemsStore);
     this.down('#orderTotal').setData(data.getData());
-    this.callParent(arguments);
   }
 });
 
