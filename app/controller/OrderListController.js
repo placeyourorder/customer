@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-06-30 23:42:44
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-07-02 23:48:24
+ * @Last Modified time: 2015-08-06 12:43:47
  */
 
 'use strict';
@@ -34,9 +34,14 @@ Ext.define('Pyo.customer.controller.OrderListController', {
     var store = Ext.create('Pyo.customer.store.OrderListStore');
     store.getProxy().setUrl(url);
     store.load({
-      callback: function() {
-        console.log(store);
-        view.down('#list').setStore(store);
+      callback: function(records, operation, success) {
+        if (success) {
+          view.down('#list').setStore(store);
+        } else {
+          if (operation.getError().status == 401) {
+            me.redirectTo('users/login');
+          }
+        }
       }
     });
   },

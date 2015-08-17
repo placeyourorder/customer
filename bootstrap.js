@@ -9,7 +9,8 @@
  * metadata-driven class system features
  */
 Ext.Loader.addClassPathMappings({
-  "Address": "app/model/CartModel.js",
+  "Address": "app/model/OrderModel.js",
+  "CartDataItems": "app/view/CartView.js",
   "Ext": "touch/src",
   "Ext-more": "touch/src/core/Ext-more.js",
   "Ext.Boot": ".sencha/app/Boot.js",
@@ -34,13 +35,17 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLResultSetRowList": "touch/src/device/sqlite/Sencha.js",
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "touch/src/draw/engine/SvgContext.js",
+  "ItemListDataView": "app/view/ItemListView.js",
+  "LineItems": "app/model/OrderModel.js",
   "Pyo.customer": "app",
-  "StoreDetailViewDataItem": "app/view/StoreDetailsView.js",
-  "Variant": "app/model/CartModel.js"
+  "Pyo.customer.controller.CageNavigationController": "app/controller/NavigationController.js",
+  "Pyo.customer.store.SessionInfo": "app/store/SessionStore.js",
+  "Variant": "app/model/OrderModel.js"
 });
 
 Ext.ClassManager.addNameAlternateMappings({
   "Address": [],
+  "CartDataItems": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
   "Ext.AbstractPlugin": [],
@@ -775,24 +780,54 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.viewport.WindowsPhone": [
     "Ext.viewport.WP"
   ],
-  "Pyo.customer.controller.StoreDetailsController": [],
+  "ItemListDataView": [],
+  "LineItems": [],
+  "Pyo.customer.controller.CageNavigationController": [],
+  "Pyo.customer.controller.CartController": [],
+  "Pyo.customer.controller.CategoryController": [],
+  "Pyo.customer.controller.ItemListController": [],
+  "Pyo.customer.controller.MainController": [],
+  "Pyo.customer.controller.MainMenuController": [],
+  "Pyo.customer.controller.OrderListController": [],
   "Pyo.customer.controller.StoreListController": [],
+  "Pyo.customer.controller.UserLoginController": [],
+  "Pyo.customer.controller.UserRegistrationController": [],
   "Pyo.customer.model.CartModel": [],
-  "Pyo.customer.model.StoreDetailsModel": [],
+  "Pyo.customer.model.CategoryModel": [],
+  "Pyo.customer.model.ItemListModel": [],
+  "Pyo.customer.model.LocationModel": [],
+  "Pyo.customer.model.OrderListModel": [],
+  "Pyo.customer.model.OrderModel": [],
+  "Pyo.customer.model.SessionModel": [],
   "Pyo.customer.model.StoreListModel": [],
+  "Pyo.customer.model.UserLoginModel": [],
+  "Pyo.customer.model.UserRegistrationModel": [],
   "Pyo.customer.store.CartStore": [],
-  "Pyo.customer.store.StoreDetailsStore": [],
+  "Pyo.customer.store.CategoryStore": [],
+  "Pyo.customer.store.ItemListStore": [],
+  "Pyo.customer.store.LocationStore": [],
+  "Pyo.customer.store.OrderListStore": [],
+  "Pyo.customer.store.OrderStore": [],
+  "Pyo.customer.store.SessionInfo": [],
   "Pyo.customer.store.StoreListStore": [],
   "Pyo.customer.util.Constants": [],
+  "Pyo.customer.view.CartView": [],
+  "Pyo.customer.view.CategoryView": [],
+  "Pyo.customer.view.ItemListView": [],
   "Pyo.customer.view.Main": [],
-  "Pyo.customer.view.StoreDetailsView": [],
+  "Pyo.customer.view.MainMenu": [],
+  "Pyo.customer.view.OrderListView": [],
   "Pyo.customer.view.StoreListView": [],
-  "StoreDetailViewDataItem": [],
+  "Pyo.customer.view.UserLoginView": [],
+  "Pyo.customer.view.UserRegistrationView": [],
   "Variant": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
   "Address": [],
+  "CartDataItems": [
+    "widget.cartDataItems"
+  ],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
   "Ext.AbstractPlugin": [],
@@ -1745,26 +1780,63 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Ios": [],
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
-  "Pyo.customer.controller.StoreDetailsController": [],
+  "ItemListDataView": [
+    "widget.itemListDataView"
+  ],
+  "LineItems": [],
+  "Pyo.customer.controller.CageNavigationController": [],
+  "Pyo.customer.controller.CartController": [],
+  "Pyo.customer.controller.CategoryController": [],
+  "Pyo.customer.controller.ItemListController": [],
+  "Pyo.customer.controller.MainController": [],
+  "Pyo.customer.controller.MainMenuController": [],
+  "Pyo.customer.controller.OrderListController": [],
   "Pyo.customer.controller.StoreListController": [],
+  "Pyo.customer.controller.UserLoginController": [],
+  "Pyo.customer.controller.UserRegistrationController": [],
   "Pyo.customer.model.CartModel": [],
-  "Pyo.customer.model.StoreDetailsModel": [],
+  "Pyo.customer.model.CategoryModel": [],
+  "Pyo.customer.model.ItemListModel": [],
+  "Pyo.customer.model.LocationModel": [],
+  "Pyo.customer.model.OrderListModel": [],
+  "Pyo.customer.model.OrderModel": [],
+  "Pyo.customer.model.SessionModel": [],
   "Pyo.customer.model.StoreListModel": [],
+  "Pyo.customer.model.UserLoginModel": [],
+  "Pyo.customer.model.UserRegistrationModel": [],
   "Pyo.customer.store.CartStore": [],
-  "Pyo.customer.store.StoreDetailsStore": [],
+  "Pyo.customer.store.CategoryStore": [],
+  "Pyo.customer.store.ItemListStore": [],
+  "Pyo.customer.store.LocationStore": [],
+  "Pyo.customer.store.OrderListStore": [],
+  "Pyo.customer.store.OrderStore": [],
+  "Pyo.customer.store.SessionInfo": [],
   "Pyo.customer.store.StoreListStore": [],
   "Pyo.customer.util.Constants": [],
+  "Pyo.customer.view.CartView": [
+    "widget.cart-view"
+  ],
+  "Pyo.customer.view.CategoryView": [
+    "widget.category-view"
+  ],
+  "Pyo.customer.view.ItemListView": [
+    "widget.store-detail-view"
+  ],
   "Pyo.customer.view.Main": [
     "widget.main"
   ],
-  "Pyo.customer.view.StoreDetailsView": [
-    "widget.store-detail-view"
+  "Pyo.customer.view.MainMenu": [],
+  "Pyo.customer.view.OrderListView": [
+    "widget.order-list"
   ],
   "Pyo.customer.view.StoreListView": [
     "widget.store-list"
   ],
-  "StoreDetailViewDataItem": [
-    "widget.storeDetailViewDataItem"
+  "Pyo.customer.view.UserLoginView": [
+    "widget.user-Login"
+  ],
+  "Pyo.customer.view.UserRegistrationView": [
+    "widget.user-registration"
   ],
   "Variant": []
 });

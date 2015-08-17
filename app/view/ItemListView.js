@@ -2,17 +2,17 @@
 * @Author: renjithks
 * @Date:   2015-06-29 01:13:33
 * @Last Modified by:   renjithks
-* @Last Modified time: 2015-07-02 23:17:25
+* @Last Modified time: 2015-08-12 15:33:45
 */
 Ext.define('Pyo.customer.view.ItemListView', {
-  extend: 'Ext.Panel',
+  extend: 'Pyo.customer.view.Main',
   alias: 'widget.store-detail-view',
   requires: [
-    'Ext.TitleBar',
     'Ext.dataview.component.DataItem'
   ],
   config: {
     id: 'store-detail-view',
+    barTitle: 'Items',
     itemId: 'mainView',
     storeId: null,
     cartStore: null,
@@ -21,19 +21,9 @@ Ext.define('Pyo.customer.view.ItemListView', {
       align: 'middle'
     },
     items: [{
-      xtype: 'titlebar',
-      docked: 'top',
-      ui: 'light',
-      title: 'List of items',
-      items: [{
-        itemId: 'cartIcon',
-        iconCls: 'action',
-        align: 'right',
-        text: '0'
-      }],
-    }, {
       xtype: 'dataview',
       itemId: 'list',
+      cls: ['dataview-list'],
       defaultType: 'itemListDataView',
       useComponents: true,
       height: '100%',
@@ -58,12 +48,13 @@ Ext.define('ItemListDataView', {
   extend: 'Ext.dataview.component.DataItem',
   alias: 'widget.itemListDataView',
   config: {
-    padding: 10,
+    padding: 5,
     layout: {
-      type: 'hbox'
+      type: 'hbox',
+      align: 'center'
     },
     defaults: {
-      margin: 10
+      margin: 5
     },
     items: [{
       xtype: 'label',
@@ -73,14 +64,6 @@ Ext.define('ItemListDataView', {
       xtype: 'selectfield',
       itemId: 'itemVariants',
       autoSelect: true,
-      flex: 1
-    }, {
-      xtype: 'sliderfield',
-      itemId: 'qtySlider',
-      label: 'Qty',
-      value: 0,
-      minValue: 0,
-      maxValue: 10,
       flex: 2
     }, {
       xtype: 'label',
@@ -90,7 +73,6 @@ Ext.define('ItemListDataView', {
       xtype: 'button',
       itemId: 'itemAddButton',
       iconCls: 'add',
-      disabled: true,
       flex: 1
     }]
   },
@@ -107,26 +89,16 @@ Ext.define('ItemListDataView', {
         });
       }, me);
 
-      me.down('#qtySlider').on('change', function(field, newValue) {
-        if (newValue.getValue()[0] > 0) {
-          this.down('#qtySlider').setLabel('Qty ' + newValue.getValue()[0]);
-          me.down('#itemAddButton').setDisabled(false);
-        } else {
-          this.down('#qtySlider').setLabel('Qty');
-          me.down('#itemAddButton').setDisabled(true);
-        }
-      }, me);
-
       me.down('#itemAddButton').on('tap', function(obj, e, eOpts) {
         var record = this.getRecord();
-        var qty = me.down('#qtySlider').getValue()[0];
+        var qty = 1;
         var item = record;
         var variant = me.down('#itemVariants').getValue();
         var mainView = me.up('store-detail-view');
         var cartStore = mainView.getCartStore();
-        cartStore.addItem(item, variant, qty);
+        cartStore.addItem(item.data, variant, qty);
         var cart = cartStore.getCartForStore(mainView.getStoreId());
-        me.up('store-detail-view').down('#cartIcon').setText(cart.lineItemsStore.getData().items.length || 0);
+        mainView.updateButtonbadge('cart-icon', cart.lineItemsStore.getCount());
       }, me);
     }, me);
   },

@@ -1,9 +1,9 @@
 /* 
-* @Author: renjithks
-* @Date:   2015-06-29 15:10:56
-* @Last Modified by:   renjithks
-* @Last Modified time: 2015-06-30 23:41:18
-*/
+ * @Author: renjithks
+ * @Date:   2015-06-29 15:10:56
+ * @Last Modified by:   renjithks
+ * @Last Modified time: 2015-08-16 01:09:03
+ */
 Ext.define('Pyo.customer.store.CartStore', {
   extend: 'Ext.data.Store',
   config: {
@@ -11,8 +11,7 @@ Ext.define('Pyo.customer.store.CartStore', {
   },
 
   addItem: function(item, variant, quantity) {
-    var data = item.data;
-    var cart = this.getCartForStore(data.store_id);
+    var cart = this.getCartForStore(item.store_id);
     var lineItem;
     if (!cart) {
       cart = this.initializeCart(item, variant, quantity);
@@ -26,7 +25,7 @@ Ext.define('Pyo.customer.store.CartStore', {
       lineItem = this.initializeLineItem(item, variant, quantity);
       cart.lineItemsStore.addData(lineItem);
     } else {
-      var currentVariant = _.where(data.variations, {
+      var currentVariant = _.where(item.variations, {
         _id: variant
       })[0];
       lineItem = lineItem.data;
@@ -34,40 +33,53 @@ Ext.define('Pyo.customer.store.CartStore', {
       lineItem.price = currentVariant.price;
       lineItem.total_price = lineItem.quantity * lineItem.price;
     }
-
-    cart.data.total_price = 0;
-    _.each(cart.lineItemsStore.getData().items, function(item) {
-      cart.data.total_price += item.data.total_price;
-    });
+    cart.set('total_price', null);
   },
 
-  initializeCart: function(item, variant, quantity) {
-    var data = item.data;
+  updateItem: function(cart, item, quantity) {
+    var variant = item.variant._id;
+    var lineItem = _.find(cart.lineItemsStore.getData().items, function(obj) {
+      return obj.getVariant().get('_id') === variant;
+    });
+    lineItem = lineItem.data;
+    lineItem.quantity += quantity;
+    if (lineItem.quantity < 1) {
+      return;
+    }
+    //lineItem.total_price = lineItem.quantity * lineItem.price;
+    cart.set('total_price', null);
+    return cart;
+  },
+
+    initializeCart: function(item, variant, quantity) {
+    var storeList = Ext.getStore('storeList');
+    var store = storeList.findRecord('_id', item.store_id);
     var cart = {
-      store_id: data.store_id,
+      store_id: item.store_id,
+      store_details: {
+        title: store.data.title,
+        address: store.data.address
+      },
       address: {},
-      total_price: 0,
       lineItems: []
     };
-
     var lineItem = this.initializeLineItem(item, variant, quantity);
-    cart.total_price += lineItem.total_price;
     cart.lineItems.push(lineItem);
 
     return cart;
   },
 
   initializeLineItem: function(item, variant, quantity) {
-    var data = item.data;
     var lineItem = {
+      item_id: item._id,
+      name: item.name,
+      store_id: item.store_id,
       quantity: 0
     };
-    var currentVariant = _.where(data.variations, {
+    var currentVariant = _.where(item.variations, {
       _id: variant
     })[0];
 
-    lineItem.item_id = data._id;
-    lineItem.name = data.name;
     lineItem.variant = {
       _id: variant,
       uom: currentVariant.uom,

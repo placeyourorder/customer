@@ -1,0 +1,16 @@
+$dark-theme: false;
+$base-color: #4abce7;
+
+@import 'sencha-touch/mountainview';
+@import 'sencha-touch/mountainview/all';
+
+@include icon('list');
+@include icon('cart');
+@include icon('trash');
+@include icon('add');
+@include icon('minus2');
+@include icon('browser');
+@include icon('box');
+@include icon('user');
+@include icon('power');
+@include icon('pencil');

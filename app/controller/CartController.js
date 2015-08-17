@@ -1,9 +1,9 @@
 /* 
-* @Author: renjithks
-* @Date:   2015-06-30 23:36:38
-* @Last Modified by:   renjithks
-* @Last Modified time: 2015-07-04 20:12:20
-*/
+ * @Author: renjithks
+ * @Date:   2015-06-30 23:36:38
+ * @Last Modified by:   renjithks
+ * @Last Modified time: 2015-08-15 23:30:12
+ */
 Ext.define('Pyo.customer.controller.CartController', {
   extend: 'Ext.app.Controller',
 
@@ -14,11 +14,12 @@ Ext.define('Pyo.customer.controller.CartController', {
     },
     refs: {
       cartView: 'cart-view',
-      cartSubmitBUtton: 'cart-view #submit-button'
+      itemListView: '#cart-view #list',
+      cartSubmitButton: 'cart-view #submit-button'
     },
     control: {
-      cartSubmitBUtton: {
-        tap: '_createOrder'
+      itemListView: {
+       // itemtap: '_itemListTap'
       }
     }
   },
@@ -40,8 +41,6 @@ Ext.define('Pyo.customer.controller.CartController', {
     }
     var cart = store.getCartForStore(this.getStoreId());
     view.setData(cart);
-    //Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
-    //Ext.Viewport.add(view);
     Ext.Viewport.setActiveItem(view);
   },
 
@@ -77,10 +76,14 @@ Ext.define('Pyo.customer.controller.CartController', {
       },
       jsonData: orderJson,
       success: function(conn, response, options, eOpts) {
-        //me.redirectTo(Pyo.customer.util.Constants.SERVER_URL + '/stores/' + me.getStoreId() + '/orders');
+        store.getProxy().clear();
+        store.data.clear();
+        store.sync();
       },
       failure: function(conn, response, options, eOpts) {
-        console.log(response);
+        if (response.status == 401) {
+          me.redirectTo('users/login');
+        }
       }
     });
   }
