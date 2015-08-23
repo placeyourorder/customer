@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-06-29 15:10:56
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-16 01:09:03
+ * @Last Modified time: 2015-08-23 01:44:08
  */
 Ext.define('Pyo.customer.store.CartStore', {
   extend: 'Ext.data.Store',
@@ -56,6 +56,7 @@ Ext.define('Pyo.customer.store.CartStore', {
     var store = storeList.findRecord('_id', item.store_id);
     var cart = {
       store_id: item.store_id,
+      order_type: 'DELIVER',
       store_details: {
         title: store.data.title,
         address: store.data.address

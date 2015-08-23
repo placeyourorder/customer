@@ -38,7 +38,7 @@
 }
 
 .main-title-bar {
-  background-color: black; 
+  background-color: black;
   height: 44px;
 }
 
@@ -156,12 +156,16 @@
   font-style: italic;
 }
 
-a:-webkit-any-link { 
-  color: white; 
+a:-webkit-any-link {
+  color: white;
 }
 
 .account-address-list {
   font-size: small;
   padding: 3px 0px;
   color: grey;
+}
+
+.x-msgbox .x-title {
+  color: black;
 }

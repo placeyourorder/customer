@@ -2,12 +2,12 @@
  * @Author: renjithks
  * @Date:   2015-06-30 22:19:17
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-16 01:06:56
+ * @Last Modified time: 2015-08-23 02:11:28
  */
 Ext.define('Pyo.customer.model.CartModel', {
   extend: 'Ext.data.Model',
   config: {
-    fields: ['store_id', 'address', 'store_details', 'lineItems', {
+    fields: ['store_id', 'order_type', 'address', 'store_details', 'lineItems', {
       name: 'phone',
       defaultValue: 98989898989
     }, {

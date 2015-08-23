@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-06-30 23:36:38
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-15 23:30:12
+ * @Last Modified time: 2015-08-23 02:11:07
  */
 Ext.define('Pyo.customer.controller.CartController', {
   extend: 'Ext.app.Controller',
@@ -15,11 +15,14 @@ Ext.define('Pyo.customer.controller.CartController', {
     refs: {
       cartView: 'cart-view',
       itemListView: '#cart-view #list',
-      cartSubmitButton: 'cart-view #submit-button'
+      cartCheckoutButton: 'cart-view #checkout-button'
     },
     control: {
-      itemListView: {
-       // itemtap: '_itemListTap'
+      cartCheckoutButton: {
+       tap: '_cartCheckout'
+      },
+      cartView: {
+        ordertypechange: '_onOrderTypeChange'
       }
     }
   },
@@ -44,47 +47,13 @@ Ext.define('Pyo.customer.controller.CartController', {
     Ext.Viewport.setActiveItem(view);
   },
 
-  _createOrder: function() {
+  _cartCheckout: function() {
+    this.redirectTo('stores/'.concat(this.getStoreId()).concat('/cart/checkout'));
+  },
+
+  _onOrderTypeChange: function(type) {
     var store = Ext.getStore('cartStore');
     var cart = store.getCartForStore(this.getStoreId());
-    var orderJson = {
-      store_id: this.getStoreId(),
-      address: cart.data.address,
-      phone: cart.data.phone,
-      total_price: cart.data.total_price,
-      line_items: []
-    };
-    var lineItems = orderJson.line_items;
-    _.each(cart.lineItemsStore.getData().items, function(item) {
-      lineItems.push({
-        item_id: item.data.item_id,
-        quantity: item.data.quantity,
-        name: item.data.name,
-        variant: {
-          _id: item.getVariant().get('_id'),
-          uom: item.getVariant().get('uom'),
-          quantity: item.getVariant().get('quantity'),
-        }
-      });
-    });
-    var me = this;
-    Ext.Ajax.request({
-      url: Pyo.customer.util.Constants.SERVER_URL + '/stores/' + this.getStoreId() + '/orders',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      jsonData: orderJson,
-      success: function(conn, response, options, eOpts) {
-        store.getProxy().clear();
-        store.data.clear();
-        store.sync();
-      },
-      failure: function(conn, response, options, eOpts) {
-        if (response.status == 401) {
-          me.redirectTo('users/login');
-        }
-      }
-    });
+    cart.set('order_type', type);
   }
 });

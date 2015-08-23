@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-06-29 15:24:03
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-16 01:12:24
+ * @Last Modified time: 2015-08-23 02:09:24
  */
 Ext.define('Pyo.customer.view.CartView', {
   extend: 'Pyo.customer.view.Main',
@@ -21,15 +21,51 @@ Ext.define('Pyo.customer.view.CartView', {
       xtype: 'panel',
       itemId: 'cartHeader',
       cls: 'cart-header',
+      flex: 2,
       padding: 10
+    }, {
+      xtype: 'fieldset',
+      items: [{
+        xtype: 'radiofield',
+        name: 'ordertype',
+        value: 'DELIVER',
+        label: 'Deliver',
+        checked: true,
+        height: 25,
+        listeners: {
+          check: function(radioButton, e, eOpts) {
+            this.up('#cart-view').fireEvent('ordertypechange', radioButton.getValue());
+          }
+        }
+      }, {
+        xtype: 'radiofield',
+        name: 'ordertype',
+        value: 'PICKUP',
+        label: 'Pickup',
+        height: 25,
+        listeners: {
+          check: function(radioButton, e, eOpts) {
+            this.up('#cart-view').fireEvent('ordertypechange', radioButton.getValue());
+          }
+        }
+      }]
     }, {
       xtype: 'dataview',
       itemId: 'list',
       cls: ['dataview-list'],
       defaultType: 'cartitem',
       useComponents: true,
-      height: '100%',
+      flex: 8,
+      //height: '100%',
       width: '100%'
+    }, {
+      xtype: 'button',
+      dicked: 'bottom',
+      itemId: 'checkout-button',
+      text: 'Checkout',
+      flex: 1,
+      width: '100%',
+      disabled: true
     }]
   },
 
@@ -61,8 +97,13 @@ Ext.define('Pyo.customer.view.CartView', {
     this.callParent(arguments);
     if (!data)
       return;
+    this.down('#checkout-button').setDisabled(!data.lineItemsStore.getCount());
     this.down('#list').setStore(data.lineItemsStore);
     this.down('#cartHeader').setData(data.getData());
+  },
+
+  _onOrderTypeChange: function(type) {
+
   }
 });
 
@@ -203,7 +244,7 @@ Ext.define('CartItem', {
     spinField.fireEvent('quantityspin', record, spinField, newValue, this);
     var cart = Ext.getStore('cartStore').getCartForStore(record.get('store_id'));
     cart.set('total_price', null);
-    if(this.up('#cart-view'))
+    if (this.up('#cart-view'))
       this.up('#cart-view').down('#cartHeader').setData(cart.getData());
   },
 
@@ -232,8 +273,11 @@ Ext.define('CartItem', {
     button.fireEvent('deleteitem', this);
     var cart = Ext.getStore('cartStore').getCartForStore(record.get('store_id'));
     cart.set('total_price', null);
-    if(this.up('#cart-view'))
+
+    if (this.up('#cart-view')) {
       this.up('#cart-view').down('#cartHeader').setData(cart.getData());
+      this.up('#cart-view').down('#checkout-button').setDisabled(!cart.lineItemsStore.getCount());
+    }
 
     // Ext.Msg.confirm(null, "Do you want to remove?", function(answer) {
     //   console.log('Hi');

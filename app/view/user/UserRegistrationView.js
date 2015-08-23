@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-05 21:25:41
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-16 15:28:06
+ * @Last Modified time: 2015-08-22 00:46:36
  */
 
 'use strict';
@@ -12,7 +12,6 @@ Ext.define('Pyo.customer.view.user.UserRegistrationView', {
   alias: 'widget.user-registration',
   config: {
     id: 'user-registration',
-    //fullscreen: true,
     padding: 10,
     layout: {
       type: 'vbox',

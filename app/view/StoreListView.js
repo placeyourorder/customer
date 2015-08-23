@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-06-22 01:41:44
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-11 16:43:15
+ * @Last Modified time: 2015-08-22 01:26:39
  */
 Ext.define('Pyo.customer.view.StoreListView', {
   extend: 'Pyo.customer.view.Main',
@@ -15,11 +15,8 @@ Ext.define('Pyo.customer.view.StoreListView', {
     },
     items: [{
       xtype: 'selectfield',
+      itemId: 'address-select',
       label: 'Stores near',
-      options: [{
-        text: 'Current Location',
-        value: 'Current Location'
-      }]
     }, {
       xtype: 'list',
       itemId: 'list',

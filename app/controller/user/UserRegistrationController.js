@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-05 21:25:11
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-16 15:31:37
+ * @Last Modified time: 2015-08-22 00:41:59
  */
 
 'use strict';
@@ -26,6 +26,7 @@ Ext.define('Pyo.customer.controller.user.UserRegistrationController', {
   },
 
   _register: function() {
+    console.log('Wtf');
     var view = this.getUserRegistrationView();
     if(!view) {
       view = Ext.create('Pyo.customer.view.user.UserRegistrationView');
@@ -36,7 +37,6 @@ Ext.define('Pyo.customer.controller.user.UserRegistrationController', {
   _onRegisterButtonClick: function(button, e, eOpts) {
     var form = button.up('formpanel');
     var user = Ext.create('Pyo.customer.model.UserRegistrationModel', form.getValues());
-    console.log(user);
     var errors = user.validate();
     if (!errors.isValid()) {
       var errorMsg = "";

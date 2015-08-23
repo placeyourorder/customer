@@ -28,7 +28,9 @@ Ext.application({
     'Pyo.customer.controller.user.UserRegistrationController',
     'Pyo.customer.controller.user.UserLoginController',
     'Pyo.customer.controller.UserLogoutController',
-    'Pyo.customer.controller.user.UserAccountController'
+    'Pyo.customer.controller.user.UserAccountController',
+    'Pyo.customer.controller.user.AddressController',
+    'Pyo.customer.controller.cart.CheckoutController'
   ],
 
   views: [
@@ -41,7 +43,9 @@ Ext.application({
     'Pyo.customer.view.CategoryView',
     'Pyo.customer.view.user.UserRegistrationView',
     'Pyo.customer.view.user.UserLoginView',
-    'Pyo.customer.view.user.UserAccountView'
+    'Pyo.customer.view.user.UserAccountView',
+    'Pyo.customer.view.user.AddressView',
+    'Pyo.customer.view.cart.CheckoutView'
   ],
 
   models: [
@@ -56,7 +60,7 @@ Ext.application({
     'Pyo.customer.model.OrderModel',
     'Pyo.customer.model.user.UserAccountLocalStorageModel',
     'Pyo.customer.model.user.UserAccountModel',
-    'address'
+    //'address'
   ],
 
   stores: [
@@ -94,6 +98,29 @@ Ext.application({
   },
 
   launch: function() {
+    //Fires before a network request is made to retrieve a data object.
+    Ext.Ajax.on('beforerequest', function(con, opt) {
+      //To show the mask
+      Ext.Viewport.setMasked({
+        xtype: 'loadmask',
+        indicator: true
+      });
+
+    }, this);
+
+    //Fires if the request was successfully completed and hide the mask.
+    Ext.Ajax.on('requestcomplete', function(con, res, opt) {
+      //To hide the mask
+      Ext.Viewport.setMasked(false);
+    }, this);
+
+    //Fires if an error HTTP status was returned from the server  and hide the mask.
+    Ext.Ajax.on('requestexception', function(con, response, opt) {
+      //To hide the mask
+      Ext.Viewport.setMasked(false);
+
+    }, this);
+
     Ext.create('Pyo.customer.store.LocationStore', {
       storeId: 'locationLocalStore'
     });
@@ -102,6 +129,7 @@ Ext.application({
       storeId: 'userAccountLocalStore'
     });
 
+    // Get the location of user
     var geoLocation = Ext.create('Ext.util.Geolocation', {
       autoUpdate: false,
       listeners: {
@@ -125,6 +153,7 @@ Ext.application({
         }
       }
     });
+
     this.geoLocation = geoLocation;
     geoLocation.updateLocation();
     Ext.fly('appLoadingIndicator').destroy();

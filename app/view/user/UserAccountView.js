@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-16 15:36:08
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-17 04:40:15
+ * @Last Modified time: 2015-08-22 00:29:25
  */
 
 Ext.define('Pyo.customer.view.user.UserAccountView', {
@@ -42,15 +42,19 @@ Ext.define('Pyo.customer.view.user.UserAccountView', {
       xtype: 'fieldset',
       title: 'Adderss',
       height: '40%',
+      padding: 10,
       items: [{
+        xtype: 'button',
+        itemId: 'add-address',
+        iconCls: 'add'
+      }, {
         xtype: 'dataview',
         itemId: 'address-list',
         cls: ['dataview-list'],
         defaultType: 'addresslistitem',
         useComponents: true,
         height: '100%',
-        width: '100%',
-        padding: 10
+        width: '100%'
       }]
     }]
   },
@@ -122,7 +126,7 @@ Ext.define('AddressListItem', {
       iconCls: 'pencil',
       iconMask: true,
       ui: 'plain',
-      itemId: "itemdelete"
+      itemId: "edit-address"
     },
 
     layout: {
@@ -170,8 +174,6 @@ Ext.define('AddressListItem', {
   onEditButtonTap: function(button, e) {
     var record = this.getRecord(),
       me = this;
-    console.log('Edit button tapped');
-    //me.getDataview().getStore().remove(record);
-    button.fireEvent('edititem', this);
+    this.up('#user-account').fireEvent('editaddress', record);
   }
 });
