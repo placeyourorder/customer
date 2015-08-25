@@ -16,7 +16,7 @@ Ext.define('Pyo.customer.controller.user.UserForgotPasswordController', {
     },
     refs: {
       userForgotPasswordView: '#user-forgotpassword',
-      submitButton: '#user-submit #submit'
+      submitButton: '#user-forgotpassword #submit'
     },
     control: {
       submitButton: {
