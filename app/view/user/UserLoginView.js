@@ -52,6 +52,16 @@ Ext.define('Pyo.customer.view.user.UserLoginView', {
       styleHtmlContent: true,
       styleHtmlCls : 'login-view-registration-link underlined',
       docked: 'bottom',
+    },
+    {
+      xtype: 'label',
+      itemId: 'userForgotPassword',
+      html: 'Forgot Password?',
+      flex: 1,
+      padding: 10,
+      styleHtmlContent: true,
+      styleHtmlCls : 'login-view-registration-link underlined',
+      docked: 'bottom',
     }]
   }
 });

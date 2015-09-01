@@ -30,7 +30,8 @@ Ext.application({
     'Pyo.customer.controller.UserLogoutController',
     'Pyo.customer.controller.user.UserAccountController',
     'Pyo.customer.controller.user.AddressController',
-    'Pyo.customer.controller.cart.CheckoutController'
+    'Pyo.customer.controller.cart.CheckoutController',
+    'Pyo.customer.controller.user.UserForgotPasswordController'
   ],
 
   views: [
@@ -45,7 +46,8 @@ Ext.application({
     'Pyo.customer.view.user.UserLoginView',
     'Pyo.customer.view.user.UserAccountView',
     'Pyo.customer.view.user.AddressView',
-    'Pyo.customer.view.cart.CheckoutView'
+    'Pyo.customer.view.cart.CheckoutView',
+    'Pyo.customer.view.user.UserForgotPasswordView'
   ],
 
   models: [
@@ -60,6 +62,7 @@ Ext.application({
     'Pyo.customer.model.OrderModel',
     'Pyo.customer.model.user.UserAccountLocalStorageModel',
     'Pyo.customer.model.user.UserAccountModel',
+    'Pyo.customer.model.UserForgotPasswordModel',
     //'address'
   ],
 

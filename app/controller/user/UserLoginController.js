@@ -17,7 +17,8 @@ Ext.define('Pyo.customer.controller.user.UserLoginController', {
     refs: {
       userLoginView: '#user-login',
       loginButton: '#user-login #login',
-      userRegistrationButton: '#user-login #userRegistration'
+      userRegistrationButton: '#user-login #userRegistration',
+      userForgotPasswordButton: '#user-login #userForgotPassword'
     },
     control: {
       loginButton: {
@@ -36,6 +37,12 @@ Ext.define('Pyo.customer.controller.user.UserLoginController', {
         me.redirectTo('users/register');
       }
     });
+    this.getUserForgotPasswordButton().element.on({
+      tap: function(e,t) {
+       Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
+        me.redirectTo('users/forgotpassword'); 
+      }
+    })
     Ext.Viewport.setActiveItem(view);
   },
 
