@@ -1,9 +1,9 @@
 /* 
-* @Author: renjithks
-* @Date:   2015-08-22 17:09:26
-* @Last Modified by:   renjithks
-* @Last Modified time: 2015-08-23 17:27:08
-*/
+ * @Author: renjithks
+ * @Date:   2015-08-22 17:09:26
+ * @Last Modified by:   renjithks
+ * @Last Modified time: 2015-08-23 23:48:15
+ */
 
 'use strict';
 
@@ -52,6 +52,7 @@ Ext.define('Pyo.customer.controller.cart.CheckoutController', {
     var cart = store.getCartForStore(this.getStoreId());
     var orderJson = {
       store_id: this.getStoreId(),
+      store_details: cart.data.store_details,
       address: cart.data.address,
       phone: cart.data.phone,
       order_type: cart.data.order_type,
@@ -83,6 +84,7 @@ Ext.define('Pyo.customer.controller.cart.CheckoutController', {
         store.getProxy().clear();
         store.data.clear();
         store.sync();
+        me.redirectTo('users/orders');
       },
       failure: function(conn, response, options, eOpts) {
         if (response.status == 401) {

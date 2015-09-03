@@ -23,14 +23,15 @@ Ext.application({
     'Pyo.customer.controller.StoreListController',
     'Pyo.customer.controller.ItemListController',
     'Pyo.customer.controller.CartController',
-    'Pyo.customer.controller.OrderListController',
+    'Pyo.customer.controller.order.OrderListController',
     'Pyo.customer.controller.CategoryController',
     'Pyo.customer.controller.user.UserRegistrationController',
     'Pyo.customer.controller.user.UserLoginController',
     'Pyo.customer.controller.UserLogoutController',
     'Pyo.customer.controller.user.UserAccountController',
     'Pyo.customer.controller.user.AddressController',
-    'Pyo.customer.controller.cart.CheckoutController'
+    'Pyo.customer.controller.cart.CheckoutController',
+    'Pyo.customer.controller.order.OrderDetailsController'
   ],
 
   views: [
@@ -39,25 +40,25 @@ Ext.application({
     'Pyo.customer.view.StoreListView',
     'Pyo.customer.view.ItemListView',
     'Pyo.customer.view.CartView',
-    'Pyo.customer.view.OrderListView',
+    'Pyo.customer.view.order.OrderListView',
+    'Pyo.customer.view.order.OrderDetailsView',
     'Pyo.customer.view.CategoryView',
     'Pyo.customer.view.user.UserRegistrationView',
     'Pyo.customer.view.user.UserLoginView',
     'Pyo.customer.view.user.UserAccountView',
     'Pyo.customer.view.user.AddressView',
-    'Pyo.customer.view.cart.CheckoutView'
+    'Pyo.customer.view.cart.CheckoutView',
   ],
 
   models: [
     'Pyo.customer.model.StoreModel',
     'Pyo.customer.model.ItemModel',
     'Pyo.customer.model.CartModel',
-    'Pyo.customer.model.OrderListModel',
     'Pyo.customer.model.CategoryModel',
     'Pyo.customer.model.UserRegistrationModel',
     'Pyo.customer.model.UserLoginModel',
     'Pyo.customer.model.LocationModel',
-    'Pyo.customer.model.OrderModel',
+    'Pyo.customer.model.order.OrderModel',
     'Pyo.customer.model.user.UserAccountLocalStorageModel',
     'Pyo.customer.model.user.UserAccountModel',
     //'address'
@@ -67,7 +68,7 @@ Ext.application({
     'Pyo.customer.store.StoreListStore',
     'Pyo.customer.store.ItemListStore',
     'Pyo.customer.store.CartStore',
-    'Pyo.customer.store.OrderListStore',
+    'Pyo.customer.store.order.OrderStore',
     'Pyo.customer.store.CategoryStore',
     'Pyo.customer.store.LocationStore',
     'Pyo.customer.store.user.UserAccountStore',

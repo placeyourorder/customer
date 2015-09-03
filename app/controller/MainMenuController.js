@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-10 20:13:49
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-17 04:52:19
+ * @Last Modified time: 2015-08-23 23:12:41
  */
 
 'use strict';
@@ -36,6 +36,13 @@ Ext.define('Pyo.customer.controller.MainMenuController', {
     me.getMenuItemStore().element.on({
       tap: function(e, t) {
         me.redirectTo('stores');
+        Ext.Viewport.toggleMenu('left');
+      }
+    });
+
+    me.getMenuItemOrders().element.on({
+      tap: function(e, t) {
+        me.redirectTo('users/orders');
         Ext.Viewport.toggleMenu('left');
       }
     });
