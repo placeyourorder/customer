@@ -2,12 +2,12 @@
  * @Author: renjithks
  * @Date:   2015-08-06 10:19:08
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-17 02:59:14
+ * @Last Modified time: 2015-10-11 21:34:55
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.user.UserLoginController', {
+Ext.define('Customer.controller.user.UserLoginController', {
   extend: 'Ext.app.Controller',
 
   config: {
@@ -29,7 +29,8 @@ Ext.define('Pyo.customer.controller.user.UserLoginController', {
 
   _login: function() {
     var me = this;
-    var view = Ext.create('Pyo.customer.view.user.UserLoginView');
+    console.log('In Login view');
+    var view = Ext.create('Customer.view.user.UserLoginView');
     Ext.getStore('userAccountLocalStore').removeAll(true);
     this.getUserRegistrationButton().element.on({
       tap: function(e, t) {
@@ -48,7 +49,7 @@ Ext.define('Pyo.customer.controller.user.UserLoginController', {
 
   _onLoginButtonClick: function(button, e, eOpts) {
     var form = button.up('formpanel');
-    var user = Ext.create('Pyo.customer.model.UserLoginModel', form.getValues());
+    var user = Ext.create('Customer.model.UserLoginModel', form.getValues());
     var errors = user.validate();
     if (!errors.isValid()) {
       var errorMsg = "";
@@ -65,7 +66,7 @@ Ext.define('Pyo.customer.controller.user.UserLoginController', {
 
   _loginUser: function(user) {
     Ext.Ajax.request({
-      url: Pyo.customer.util.Constants.SERVER_URL + '/users/login',
+      url: Customer.util.Constants.SERVER_URL + '/users/login',
       method: 'POST',
       params: {
         email: user.get('Email'),
@@ -83,7 +84,7 @@ Ext.define('Pyo.customer.controller.user.UserLoginController', {
     var store = Ext.getStore('userAccountLocalStore');
     store.removeAll(true);
     store.add(Ext.decode(conn.responseText));
-    this.redirectTo('users/account');
+    this.redirectTo('stores');
   },
 
   _onLoginFailure: function(conn, response, options, eOpts) {

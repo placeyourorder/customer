@@ -2,12 +2,12 @@
  * @Author: renjithks
  * @Date:   2015-08-06 00:52:55
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-06 09:20:53
+ * @Last Modified time: 2015-11-02 00:28:03
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.model.UserRegistrationModel', {
+Ext.define('Customer.model.UserRegistrationModel', {
   extend: 'Ext.data.Model',
   config: {
     fields: [{
@@ -32,6 +32,10 @@ Ext.define('Pyo.customer.model.UserRegistrationModel', {
       type: 'presence',
       field: 'Phone',
       message: 'is required.'
+    }, {
+      type: 'format',
+      field: 'Phone',
+      matcher: /[0-9]/
     }, {
       type: 'length',
       field: 'Email',

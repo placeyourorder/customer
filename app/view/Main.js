@@ -2,10 +2,10 @@
  * @Author: renjithks
  * @Date:   2015-06-21 22:53:57
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-22 18:32:36
+ * @Last Modified time: 2015-10-17 23:59:59
  */
 
-Ext.define('Pyo.customer.view.Main', {
+Ext.define('Customer.view.Main', {
   extend: 'Ext.Container',
   xtype: 'mainPanel',
   requires: [
@@ -13,7 +13,7 @@ Ext.define('Pyo.customer.view.Main', {
   ],
   config: {
     href: null,
-    barTitle: 'Navigation',
+    barTitle: null,
     layout: 'vbox',
     items: []
   },
@@ -24,6 +24,7 @@ Ext.define('Pyo.customer.view.Main', {
       cls: 'main-title-bar',
       docked: 'top',
       title: this.getBarTitle(),
+      layout: 'hbox',
       items: [{
         itemId: 'menu-button',
         iconCls: 'list',
@@ -50,7 +51,7 @@ Ext.define('Pyo.customer.view.Main', {
     bar.add({
       itemId: id,
       iconCls: iconCls,
-      align: align,
+      align: align || 'riht',
       badgeText: (text == 0 ? null : text),
       listeners: {
         tap: onClick
@@ -58,11 +59,42 @@ Ext.define('Pyo.customer.view.Main', {
     });
   },
 
+  showTitleBarButton: function(id) {
+    var me = this;
+    var bar = me.down('#main-title-bar');
+    var button = bar.down('#id');
+    if (button) {
+      button.show(true);
+    }
+  },
+
+  hideTitleBarButton: function(id) {
+    var me = this;
+    var bar = me.down('#main-title-bar');
+    var button = bar.down('#id');
+    if (button) {
+      button.hide(true);
+    }
+  },
+
   updateButtonbadge: function(id, text) {
     var bar = this.down('#main-title-bar');
-    var button = bar.down('#'+id);
+    var button = bar.down('#' + id);
     if (button) {
       button.setBadgeText((text == 0 ? null : text));
     }
+  },
+
+  addSearchField: function() {
+    var me = this;
+    var bar = me.down('#main-title-bar');
+    bar.add({
+      xtype: 'searchfield',
+      itemId: 'itemSearch',
+      autoComplete: true,
+      docked: 'right',
+      flex: 1,
+      placeHolder: 'Search'
+    });
   }
 });

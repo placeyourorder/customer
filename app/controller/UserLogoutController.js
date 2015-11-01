@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.UserLogoutController', {
+Ext.define('Customer.controller.UserLogoutController', {
   extend: 'Ext.app.Controller',
 
   config: {
@@ -19,7 +19,7 @@ Ext.define('Pyo.customer.controller.UserLogoutController', {
   _logout: function() {
     var me = this;
     Ext.Ajax.request({
-      url: Pyo.customer.util.Constants.SERVER_URL + '/users/logout',
+      url: Customer.util.Constants.SERVER_URL + '/users/logout',
       method: 'GET',
       scope: this,
       success: this._onLogoutSuccess,

@@ -2,13 +2,13 @@
  * @Author: renjithks
  * @Date:   2015-07-14 01:45:51
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-12 14:44:25
+ * @Last Modified time: 2015-09-06 03:44:44
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.CategoryController', {
-  extend: 'Pyo.customer.controller.MainController',
+Ext.define('Customer.controller.CategoryController', {
+  extend: 'Customer.controller.MainController',
 
   config: {
     storeId: null,
@@ -17,8 +17,14 @@ Ext.define('Pyo.customer.controller.CategoryController', {
     },
     refs: {
       categoryView: '#category-view',
-      categoryList: '#category-view #list'
+      categoryList: '#category-view #list',
+      itemSearch: '#category-view #item-search'
     },
+    control: {
+      itemSearch: {
+        action: '_onItemSearch'
+      }
+    }
   },
 
   _getStoreCategories: function(storeId) {
@@ -36,11 +42,11 @@ Ext.define('Pyo.customer.controller.CategoryController', {
     if (this.getCategoryView()) {
       this.getCategoryView().destroy();
     }
-    view = Ext.create('Pyo.customer.view.CategoryView');
+    view = Ext.create('Customer.view.CategoryView');
     Ext.Viewport.setActiveItem(view);
     view.setHref(window.location.hash);
-    var store = Ext.create('Pyo.customer.store.CategoryStore');
-    var url = Pyo.customer.util.Constants.SERVER_URL + '/stores/' + storeId + '/categories';
+    var store = Ext.create('Customer.store.CategoryStore');
+    var url = Customer.util.Constants.SERVER_URL + '/stores/' + storeId + '/categories';
     store.getProxy().setUrl(url);
     store.load({
       callback: function(records, operation, success) {
@@ -70,5 +76,12 @@ Ext.define('Pyo.customer.controller.CategoryController', {
       });
       this.redirectTo('stores/' + this.getStoreId() + '/items/?' + queryParams);
     }, this);
+  },
+
+  _onItemSearch: function(search, e, eOpts) {
+    var queryParams = Ext.urlEncode({
+      category: search.getValue()
+    });
+    this.redirectTo('stores/' + this.getStoreId() + '/items/?' + queryParams);
   }
 });

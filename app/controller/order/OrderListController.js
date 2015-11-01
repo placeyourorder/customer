@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.order.OrderListController', {
+Ext.define('Customer.controller.order.OrderListController', {
   extend: 'Ext.app.Controller',
 
   config: {
@@ -30,12 +30,12 @@ Ext.define('Pyo.customer.controller.order.OrderListController', {
     if (this.getOrderListView()) {
       this.getOrderListView().destroy();
     }
-    var view = Ext.create('Pyo.customer.view.order.OrderListView');
+    var view = Ext.create('Customer.view.order.OrderListView');
     Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
     Ext.Viewport.setActiveItem(view);
 
-    var url = Pyo.customer.util.Constants.SERVER_URL + '/users/orders';
-    var store = Ext.create('Pyo.customer.store.order.OrderStore', {
+    var url = Customer.util.Constants.SERVER_URL + '/users/orders';
+    var store = Ext.create('Customer.store.order.OrderStore', {
       storeId: 'orderStore'
     });
     store.getProxy().setUrl(url);

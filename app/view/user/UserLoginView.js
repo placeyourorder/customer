@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.view.user.UserLoginView', {
+Ext.define('Customer.view.user.UserLoginView', {
   extend: 'Ext.Container',
   alias: 'widget.user-Login',
   config: {

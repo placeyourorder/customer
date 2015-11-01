@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.view.user.UserForgotPasswordView', {
+Ext.define('Customer.view.user.UserForgotPasswordView', {
   extend: 'Ext.Container',
   alias: 'widget.user-forgotpassword',
   config: {

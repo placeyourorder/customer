@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.model.user.UserAccountLocalStorageModel', {
+Ext.define('Customer.model.user.UserAccountLocalStorageModel', {
   extend: 'Ext.data.Model',
   config: {
     fields: ['_id', 'email', 'phone', 'address'],

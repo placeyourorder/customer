@@ -2,13 +2,13 @@
  * @Author: renjithks
  * @Date:   2015-08-16 15:35:44
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-22 00:38:21
+ * @Last Modified time: 2015-11-02 00:18:08
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.user.UserAccountController', {
-  extend: 'Pyo.customer.controller.MainController',
+Ext.define('Customer.controller.user.UserAccountController', {
+  extend: 'Customer.controller.MainController',
 
   config: {
     routes: {
@@ -16,10 +16,11 @@ Ext.define('Pyo.customer.controller.user.UserAccountController', {
     },
     refs: {
       accountView : '#user-account',
+      addressList: '#user-account addresslistitem',
       addAddressButton : '#user-account #add-address'
     },
     control: {
-      accountView: {
+      addressList: {
         editaddress: '_onEditAddressClick'
       },
       addAddressButton :{
@@ -30,26 +31,28 @@ Ext.define('Pyo.customer.controller.user.UserAccountController', {
 
   _showView: function() {
     var me = this;
-    var view = this.getAccountView();
-    if(view) {
-      view.destroy();
+    console.log('In show view');
+    var view = me.getAccountView();
+    if(!view) {
+      //view.destroy();
+      console.log('Creating view');
+      view = Ext.create('Customer.view.user.UserAccountView');
     }
-    view = Ext.create('Pyo.customer.view.user.UserAccountView');
+    //view = Ext.create('Customer.view.user.UserAccountView');
     var userDetails = Ext.getStore('userAccountLocalStore').getAt(0);
     view.setData(userDetails);
     Ext.Viewport.setActiveItem(view);
   },
 
   _onEditAddressClick: function(data) {
-    console.log('Edit address clicked');
+    console.log('Edit address clicked', data);
     var userDetails = Ext.getStore('userAccountLocalStore').getAt(0);
-    this.getAccountView().destroy();
     this.redirectTo('users/' + userDetails.data._id + '/address/' + data.get('_id'));
   },
 
   _onAddAddressClick: function() {
     var userDetails = Ext.getStore('userAccountLocalStore').getAt(0);
-    this.getAccountView().destroy()
+    //this.getAccountView().destroy()
     this.redirectTo('users/' + userDetails.data._id + '/address');
   }
 });

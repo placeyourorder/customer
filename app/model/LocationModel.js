@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.model.LocationModel', {
+Ext.define('Customer.model.LocationModel', {
   extend: 'Ext.data.Model',
   config: {
     fields: ['latitude', 'longitude'],

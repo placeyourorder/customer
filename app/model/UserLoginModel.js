@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.model.UserLoginModel', {
+Ext.define('Customer.model.UserLoginModel', {
   extend: 'Ext.data.Model',
   config: {
     fields: [{

@@ -7,13 +7,13 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.store.LocationStore', {
+Ext.define('Customer.store.LocationStore', {
   extend: 'Ext.data.Store',
   requires: [
     'Ext.data.proxy.LocalStorage'
   ],
   config: {
-    model: 'Pyo.customer.model.LocationModel',
+    model: 'Customer.model.LocationModel',
     autoLoad: true,
     // loginlocalstorage will be auto sync when this store is updated
     autoSync: true,

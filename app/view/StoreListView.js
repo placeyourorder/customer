@@ -2,10 +2,10 @@
  * @Author: renjithks
  * @Date:   2015-06-22 01:41:44
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-22 01:26:39
+ * @Last Modified time: 2015-09-06 01:30:11
  */
-Ext.define('Pyo.customer.view.StoreListView', {
-  extend: 'Pyo.customer.view.Main',
+Ext.define('Customer.view.StoreListView', {
+  extend: 'Customer.view.Main',
   alias: 'widget.store-list',
   config: {
     id: 'store-list',
@@ -20,6 +20,7 @@ Ext.define('Pyo.customer.view.StoreListView', {
     }, {
       xtype: 'list',
       itemId: 'list',
+      cls: 'store-list',
       itemTpl: '{title}',
       sorters: 'title',
       height: '100%',

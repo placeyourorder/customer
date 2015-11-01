@@ -6,8 +6,8 @@
  */
 
 
-Ext.define('Pyo.customer.view.order.OrderDetailsView', {
-  extend: 'Pyo.customer.view.Main',
+Ext.define('Customer.view.order.OrderDetailsView', {
+  extend: 'Customer.view.Main',
   alias: 'widget.orderdetails-view',
   requires: [
     'Ext.dataview.component.DataItem'

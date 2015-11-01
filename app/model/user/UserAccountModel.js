@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.model.user.UserAccountModel', {
+Ext.define('Customer.model.user.UserAccountModel', {
   extend: 'Ext.data.Model',
   config: {
     fields: ['_id', 'email', 'phone', 'address'],

@@ -2,12 +2,12 @@
  * @Author: renjithks
  * @Date:   2015-08-05 21:25:11
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-22 00:41:59
+ * @Last Modified time: 2015-11-02 00:35:16
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.user.UserRegistrationController', {
+Ext.define('Customer.controller.user.UserRegistrationController', {
   extend: 'Ext.app.Controller',
 
   config: {
@@ -16,7 +16,8 @@ Ext.define('Pyo.customer.controller.user.UserRegistrationController', {
     },
     refs: {
       userRegistrationView: '#user-registration',
-      registerButton: '#user-registration #register'
+      registerButton: '#user-registration #register',
+      userLoginButton: '#user-registration #userLogin',
     },
     control: {
       registerButton: {
@@ -26,17 +27,24 @@ Ext.define('Pyo.customer.controller.user.UserRegistrationController', {
   },
 
   _register: function() {
-    console.log('Wtf');
+    var me = this;
     var view = this.getUserRegistrationView();
     if(!view) {
-      view = Ext.create('Pyo.customer.view.user.UserRegistrationView');
+      view = Ext.create('Customer.view.user.UserRegistrationView');
+      this.getUserLoginButton().element.on({
+      tap: function(e, t) {
+        Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
+        me.redirectTo('users/login');
+      }
+    });
     }
+
     Ext.Viewport.add(view);
   },
 
   _onRegisterButtonClick: function(button, e, eOpts) {
     var form = button.up('formpanel');
-    var user = Ext.create('Pyo.customer.model.UserRegistrationModel', form.getValues());
+    var user = Ext.create('Customer.model.UserRegistrationModel', form.getValues());
     var errors = user.validate();
     if (!errors.isValid()) {
       var errorMsg = "";
@@ -53,9 +61,9 @@ Ext.define('Pyo.customer.controller.user.UserRegistrationController', {
 
   _createUser: function(user) {
     Ext.Ajax.request({
-      url: Pyo.customer.util.Constants.SERVER_URL + '/users/register',
+      url: Customer.util.Constants.SERVER_URL + '/users/register',
       method: 'POST',
-      params: {
+      jsonData: {
         email: user.get('Email'),
         password: user.get('Password'),
         phone: user.get('Phone'),
@@ -72,7 +80,7 @@ Ext.define('Pyo.customer.controller.user.UserRegistrationController', {
     this.redirectTo('users/login');
   },
 
-  _onRegistrationFailure: function() {
+  _onRegistrationFailure: function(conn, response, options, eOpts) {
     Ext.Msg.alert('Failed');
   }
 });

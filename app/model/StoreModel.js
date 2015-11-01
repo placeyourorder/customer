@@ -4,7 +4,7 @@
  * @Last Modified by:   renjithks
  * @Last Modified time: 2015-08-15 00:09:08
  */
-Ext.define('Pyo.customer.model.StoreModel', {
+Ext.define('Customer.model.StoreModel', {
   extend: 'Ext.data.Model',
   config: {
     fields: ['_id', 'title', 'address']

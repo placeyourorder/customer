@@ -2,12 +2,12 @@
  * @Author: renjithks
  * @Date:   2015-08-10 20:13:49
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-23 23:12:41
+ * @Last Modified time: 2015-10-16 23:59:10
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.MainMenuController', {
+Ext.define('Customer.controller.MainMenuController', {
   extend: 'Ext.app.Controller',
 
   config: {
@@ -15,18 +15,23 @@ Ext.define('Pyo.customer.controller.MainMenuController', {
       menu: '#main-menu',
       menuItemStore: '#main-menu #menuItemStore',
       menuItemOrders: '#main-menu #menuItemOrders',
+      menuItemCarts: '#main-menu #menuItemCarts',
       menuItemAccount: '#main-menu #menuItemAccount',
-      menuItemLogout: '#main-menu #menuItemLogout'
+      menuItemLogout: '#main-menu #menuItemLogout',
+      menuItemCategory: '#main-menu #menuCategory'
     },
     control: {
       loginButton: {
         tap: '_onLoginButtonClick'
+      },
+      menuItemCategory: {
+        leafitemtap: 'onLeafItemTap'
       }
     }
   },
 
   launch: function() {
-    var mainMenu = Ext.create('Pyo.customer.view.MainMenu');
+    var mainMenu = Ext.create('Customer.view.MainMenu');
     Ext.Viewport.setMenu(mainMenu, {
       side: 'left',
       reveal: true
@@ -47,6 +52,13 @@ Ext.define('Pyo.customer.controller.MainMenuController', {
       }
     });
 
+    me.getMenuItemCarts().element.on({
+      tap: function(e, t) {
+        me.redirectTo('users/carts');
+        Ext.Viewport.toggleMenu('left');
+      }
+    });
+
     me.getMenuItemLogout().element.on({
       tap: function(e, t) {
         me.redirectTo('users/logout');
@@ -60,5 +72,23 @@ Ext.define('Pyo.customer.controller.MainMenuController', {
         Ext.Viewport.toggleMenu('left');
       }
     });
+  },
+
+  onLeafItemTap: function(list, index, target, record) {
+    //var parentCategory = record.parentNode.get('text') || '';
+    Ext.Viewport.toggleMenu('left');
+    var subCategory = record.get('text');
+    if (subCategory) {
+      var store = Ext.getStore('storeList');
+      if (store) {
+        var storeId = store.getAt(0).get('_id');
+        var queryParams = Ext.urlEncode({
+          tags: subCategory
+        });
+        this.redirectTo('stores/' + storeId + '/items/?' + queryParams);
+      } else {
+        Ext.Msg.alert('Something went wrong, please logout and login');
+      }
+    }
   }
 });

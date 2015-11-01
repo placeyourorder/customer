@@ -2,12 +2,12 @@
  * @Author: renjithks
  * @Date:   2015-08-05 21:25:41
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-22 00:46:36
+ * @Last Modified time: 2015-10-02 16:07:12
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.view.user.UserRegistrationView', {
+Ext.define('Customer.view.user.UserRegistrationView', {
   extend: 'Ext.Container',
   alias: 'widget.user-registration',
   config: {
@@ -50,6 +50,15 @@ Ext.define('Pyo.customer.view.user.UserRegistrationView', {
     }, {
       xtype: 'panel',
       flex: 1
+    },{
+      xtype: 'label',
+      itemId: 'userLogin',
+      html: 'Aleady a member? Login here!',
+      flex: 1,
+      padding: 10,
+      styleHtmlContent: true,
+      styleHtmlCls : 'login-view-registration-link underlined',
+      docked: 'bottom',
     }]
   }
 });

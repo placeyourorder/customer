@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.order.OrderDetailsController', {
+Ext.define('Customer.controller.order.OrderDetailsController', {
   extend: 'Ext.app.Controller',
 
   config: {
@@ -36,10 +36,10 @@ Ext.define('Pyo.customer.controller.order.OrderDetailsController', {
   _showOrder: function(orderId) {
     var view;
     if (null == this.getOrderDetailsView()) {
-      view = Ext.create('Pyo.customer.view.order.OrderDetailsView');
+      view = Ext.create('Customer.view.order.OrderDetailsView');
     } else {
       this.getOrderDetailsView().destroy();
-      view = Ext.create('Pyo.customer.view.order.OrderDetailsView');
+      view = Ext.create('Customer.view.order.OrderDetailsView');
     }
     var store = Ext.getStore('orderStore');
     var order = store.findRecord('_id', orderId);

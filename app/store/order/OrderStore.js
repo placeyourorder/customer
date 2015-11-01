@@ -7,13 +7,13 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.store.order.OrderStore', {
+Ext.define('Customer.store.order.OrderStore', {
   extend: 'Ext.data.Store',
   requires: [
     'Ext.data.proxy.JsonP'
   ],
   config: {
-    model: 'Pyo.customer.model.order.OrderModel',
+    model: 'Customer.model.order.OrderModel',
     proxy: {
       type: 'ajax',
       url: '',

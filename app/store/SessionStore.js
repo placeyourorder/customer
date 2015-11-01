@@ -7,11 +7,11 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.store.SessionInfo', {
+Ext.define('Customer.store.SessionInfo', {
   extend: 'Ext.data.Store',
 
   config: {
-    model: 'Pyo.customer.model.SessionModel',
+    model: 'Customer.model.SessionModel',
     autoLoad: true,
 
     proxy: {

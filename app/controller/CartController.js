@@ -2,9 +2,9 @@
  * @Author: renjithks
  * @Date:   2015-06-30 23:36:38
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-23 02:11:07
+ * @Last Modified time: 2015-10-18 22:30:10
  */
-Ext.define('Pyo.customer.controller.CartController', {
+Ext.define('Customer.controller.CartController', {
   extend: 'Ext.app.Controller',
 
   config: {
@@ -19,12 +19,16 @@ Ext.define('Pyo.customer.controller.CartController', {
     },
     control: {
       cartCheckoutButton: {
-       tap: '_cartCheckout'
+        tap: '_cartCheckout'
       },
       cartView: {
         ordertypechange: '_onOrderTypeChange'
       }
     }
+  },
+
+  launch: function() {
+    var cartView = Ext.create('Customer.view.CartView');
   },
 
   getCartDetails: function(storeId) {
@@ -35,13 +39,7 @@ Ext.define('Pyo.customer.controller.CartController', {
   },
 
   _showCart: function(store) {
-    var view;
-    if (null == this.getCartView()) {
-      view = Ext.create('Pyo.customer.view.CartView');
-    } else {
-      Ext.Viewport.remove(this.getCartView());
-      view = Ext.create('Pyo.customer.view.CartView');
-    }
+    var view = this.getCartView();
     var cart = store.getCartForStore(this.getStoreId());
     view.setData(cart);
     Ext.Viewport.setActiveItem(view);

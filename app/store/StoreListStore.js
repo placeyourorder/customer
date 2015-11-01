@@ -4,10 +4,10 @@
 * @Last Modified by:   renjithks
 * @Last Modified time: 2015-08-15 00:32:21
 */
-Ext.define('Pyo.customer.store.StoreListStore', {
+Ext.define('Customer.store.StoreListStore', {
   extend: 'Ext.data.Store',
   config: {
-    model: 'Pyo.customer.model.StoreModel',
+    model: 'Customer.model.StoreModel',
     proxy: {
       type: 'ajax',
       url: ''

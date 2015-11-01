@@ -1,26 +1,29 @@
 /*
-* @Author: renjithks
-* @Date:   2015-06-29 01:13:33
-* @Last Modified by:   renjithks
-* @Last Modified time: 2015-08-12 15:33:45
-*/
-Ext.define('Pyo.customer.view.ItemListView', {
-  extend: 'Pyo.customer.view.Main',
-  alias: 'widget.store-detail-view',
+ * @Author: renjithks
+ * @Date:   2015-06-29 01:13:33
+ * @Last Modified by:   renjithks
+ * @Last Modified time: 2015-10-07 02:10:53
+ */
+Ext.define('Customer.view.ItemListView', {
+  extend: 'Customer.view.Main',
+  alias: 'widget.item-list-view',
   requires: [
-    'Ext.dataview.component.DataItem'
+    // 'Ext.dataview.component.DataItem'
   ],
   config: {
-    id: 'store-detail-view',
+    id: 'item-list-view',
     barTitle: 'Items',
     itemId: 'mainView',
     storeId: null,
     cartStore: null,
     layout: {
-      type: 'hbox',
-      align: 'middle'
+      type: 'vbox'
     },
     items: [{
+      xtype: 'searchfield',
+      itemId: 'item-search',
+      name: 'query'
+    }, {
       xtype: 'dataview',
       itemId: 'list',
       cls: ['dataview-list'],
@@ -94,7 +97,7 @@ Ext.define('ItemListDataView', {
         var qty = 1;
         var item = record;
         var variant = me.down('#itemVariants').getValue();
-        var mainView = me.up('store-detail-view');
+        var mainView = me.up('item-list-view');
         var cartStore = mainView.getCartStore();
         cartStore.addItem(item.data, variant, qty);
         var cart = cartStore.getCartForStore(mainView.getStoreId());

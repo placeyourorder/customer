@@ -2,14 +2,25 @@
  * @Author: renjithks
  * @Date:   2015-07-29 17:35:10
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-20 02:47:33
+ * @Last Modified time: 2015-10-18 00:05:50
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.MainController', {
+Ext.define('Customer.controller.MainController', {
   extend: 'Ext.app.Controller',
 
+  config: {
+    refs: {
+      mainMenu: '#main-menu'
+    },
+    control: {
+      mainMenu: {
+        show: 'onMenuVisible',
+        hide: 'onMenuHidden'
+      }
+    }
+  },
   // Transitions
   slideLeftTransition: {
     type: 'slide',
@@ -37,5 +48,13 @@ Ext.define('Pyo.customer.controller.MainController', {
     var actions = history.getActions();
     if(actions.length > 1)
       return actions[actions.length - 2].getUrl();
+  },
+
+  onMenuVisible: function() {
+    Ext.Viewport.getActiveItem().setMasked(true);
+  },
+
+  onMenuHidden: function() {
+    Ext.Viewport.getActiveItem().setMasked(false);
   }
 });

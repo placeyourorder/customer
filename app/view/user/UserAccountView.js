@@ -2,11 +2,11 @@
  * @Author: renjithks
  * @Date:   2015-08-16 15:36:08
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-22 00:29:25
+ * @Last Modified time: 2015-10-22 12:59:29
  */
 
-Ext.define('Pyo.customer.view.user.UserAccountView', {
-  extend: 'Pyo.customer.view.Main',
+Ext.define('Customer.view.user.UserAccountView', {
+  extend: 'Customer.view.Main',
   alias: 'widget.user-account',
 
   config: {
@@ -67,113 +67,8 @@ Ext.define('Pyo.customer.view.user.UserAccountView', {
     console.log(userDetails);
     this.down('#email').setValue(userDetails.email);
     this.down('#phone').setValue(userDetails.phone);
-    this.down('#address-list').setData(userDetails.address);
-  }
-});
-
-Ext.define('AddressInnerItem', {
-  extend: 'Ext.Panel',
-  xtype: 'addresstinneritem',
-
-  config: {
-    itemId: 'addressinneritem',
-    flex: 2,
-    /**
-     * Object with product's data
-     */
-    defaults: {
-      cls: ['account-address-list']
-    },
-    layout: 'vbox',
-    items: [{
-      xtype: 'label',
-      itemId: 'address1'
-    }, {
-      xtype: 'label',
-      itemId: 'address2'
-    }]
-  },
-
-  setAddress1: function(name) {
-    this.down("#address1").setHtml(name);
-  },
-  setAddress2: function(name) {
-    this.down("#address2").setHtml(name);
-  }
-});
-
-Ext.define('AddressListItem', {
-  extend: 'Ext.dataview.component.DataItem',
-  xtype: 'addresslistitem',
-
-  config: {
-    itemId: 'addresslistitem',
-    storeId: null,
-    layout: 'fit',
-    cls: 'addresslistitem-cls',
-
-    dataMap: {
-      // Map product's data to dataItem setter
-      getAddressinneritem: {
-        setAddress1: 'address1',
-        setAddress2: 'address2'
-      }
-    },
-    addressinneritem: {
-      flex: 2
-    },
-    editButton: {
-      iconCls: 'pencil',
-      iconMask: true,
-      ui: 'plain',
-      itemId: "edit-address"
-    },
-
-    layout: {
-      type: 'hbox',
-      align: 'center'
+    if(userDetails.address && userDetails.address.length) {
+      this.down('#address-list').setData(userDetails.address);
     }
-  },
-
-  applyAddressinneritem: function(config) {
-    return Ext.factory(config,
-      AddressInnerItem,
-      this.getAddressinneritem());
-  },
-
-  updateAddressinneritem: function(newItemLine, oldItemLine) {
-    if (oldItemLine) {
-
-      this.remove(oldItemLine);
-    }
-
-    if (newItemLine) {
-      // Attach lines to DataView
-      this.add(newItemLine);
-    }
-  },
-
-  applyEditButton: function(config) {
-    return Ext.factory(config, Ext.Button, this.getEditButton());
-  },
-
-  updateEditButton: function(newEditButton, oldEditButton) {
-    if (oldEditButton) {
-      this.remove(oldEditButton);
-    }
-
-    if (newEditButton) {
-      // add an event listeners for the `tap` event onto the new button, and tell it to call the onNameButtonTap method
-      // when it happens
-      newEditButton.on('tap', this.onEditButtonTap, this);
-
-      this.add(newEditButton);
-    }
-  },
-
-  onEditButtonTap: function(button, e) {
-    var record = this.getRecord(),
-      me = this;
-    this.up('#user-account').fireEvent('editaddress', record);
   }
 });

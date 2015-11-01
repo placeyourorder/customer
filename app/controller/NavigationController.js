@@ -4,7 +4,7 @@
 * @Last Modified by:   renjithks
 * @Last Modified time: 2015-06-30 23:41:09
 */
-Ext.define('Pyo.customer.controller.CageNavigationController', {
+Ext.define('Customer.controller.CageNavigationController', {
     extend: 'Ext.app.Controller',
 
     config: {

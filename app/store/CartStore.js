@@ -2,60 +2,46 @@
  * @Author: renjithks
  * @Date:   2015-06-29 15:10:56
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-23 01:44:08
+ * @Last Modified time: 2015-10-18 20:30:30
  */
-Ext.define('Pyo.customer.store.CartStore', {
+Ext.define('Customer.store.CartStore', {
   extend: 'Ext.data.Store',
   config: {
-    model: 'Pyo.customer.model.CartModel'
+    model: 'Customer.model.CartModel'
   },
 
   addItem: function(item, variant, quantity) {
-    var cart = this.getCartForStore(item.store_id);
+    var cart = this.getCartForStore(item.get('store_id'));
     var lineItem;
     if (!cart) {
       cart = this.initializeCart(item, variant, quantity);
       this.addData(cart);
       return;
     }
-    lineItem = _.find(cart.lineItemsStore.getData().items, function(obj) {
-      return obj.getVariant().get('_id') === variant;
+    lineItem = _.find(cart.get('lineItems'), function(obj) {
+      return obj.variant._id === variant;
     });
+
     if (!lineItem) {
       lineItem = this.initializeLineItem(item, variant, quantity);
-      cart.lineItemsStore.addData(lineItem);
+      cart.get('lineItems').push(lineItem);
     } else {
-      var currentVariant = _.where(item.variations, {
-        _id: variant
-      })[0];
-      lineItem = lineItem.data;
-      lineItem.quantity += quantity;
-      lineItem.price = currentVariant.price;
-      lineItem.total_price = lineItem.quantity * lineItem.price;
+      this.updateLineItem(lineItem, quantity, item.get('price'));
     }
     cart.set('total_price', null);
   },
 
-  updateItem: function(cart, item, quantity) {
-    var variant = item.variant._id;
-    var lineItem = _.find(cart.lineItemsStore.getData().items, function(obj) {
-      return obj.getVariant().get('_id') === variant;
-    });
-    lineItem = lineItem.data;
+  updateLineItem: function(lineItem, quantity, price) {
     lineItem.quantity += quantity;
-    if (lineItem.quantity < 1) {
-      return;
-    }
-    //lineItem.total_price = lineItem.quantity * lineItem.price;
-    cart.set('total_price', null);
-    return cart;
+    lineItem.price = price;
+    lineItem.total_price = lineItem.quantity * lineItem.price;
   },
 
-    initializeCart: function(item, variant, quantity) {
+  initializeCart: function(item, variant, quantity) {
     var storeList = Ext.getStore('storeList');
-    var store = storeList.findRecord('_id', item.store_id);
+    var store = storeList.findRecord('_id', item.get('store_id'));
     var cart = {
-      store_id: item.store_id,
+      store_id: item.get('store_id'),
       order_type: 'DELIVER',
       store_details: {
         title: store.data.title,
@@ -72,22 +58,19 @@ Ext.define('Pyo.customer.store.CartStore', {
 
   initializeLineItem: function(item, variant, quantity) {
     var lineItem = {
-      item_id: item._id,
-      name: item.name,
-      store_id: item.store_id,
+      item_id: item.get('id'),
+      name: item.get('name'),
+      store_id: item.get('store_id'),
       quantity: 0
     };
-    var currentVariant = _.where(item.variations, {
-      _id: variant
-    })[0];
 
     lineItem.variant = {
-      _id: variant,
-      uom: currentVariant.uom,
-      quantity: currentVariant.quantity
+      _id: item.get('variantId'),
+      uom: item.get('uom'),
+      quantity: item.get('quantity')
     };
     lineItem.quantity += quantity;
-    lineItem.price = currentVariant.price;
+    lineItem.price = item.get('price');
     lineItem.total_price = lineItem.quantity * lineItem.price;
 
     return lineItem;

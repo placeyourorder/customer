@@ -7,13 +7,13 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.store.user.UserAccountLocalStorageStore', {
+Ext.define('Customer.store.user.UserAccountLocalStorageStore', {
   extend: 'Ext.data.Store',
   requires: [
     'Ext.data.proxy.LocalStorage'
   ],
   config: {
-    model: 'Pyo.customer.model.user.UserAccountLocalStorageModel',
+    model: 'Customer.model.user.UserAccountLocalStorageModel',
     autoLoad: true,
     // loginlocalstorage will be auto sync when this store is updated
     autoSync: true,

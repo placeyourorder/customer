@@ -2,13 +2,13 @@
  * @Author: renjithks
  * @Date:   2015-08-17 15:44:31
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-22 00:25:12
+ * @Last Modified time: 2015-11-02 00:19:53
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.user.AddressController', {
-  extend: 'Pyo.customer.controller.MainController',
+Ext.define('Customer.controller.user.AddressController', {
+  extend: 'Customer.controller.MainController',
 
   config: {
     addressStore: null,
@@ -38,10 +38,10 @@ Ext.define('Pyo.customer.controller.user.AddressController', {
     this.setAddressId(addressId);
     var view = this.getAddressView();
     if (!view) {
-      view = Ext.create('Pyo.customer.view.user.AddressView');
+      view = Ext.create('Customer.view.user.AddressView');
     }
     var userDetails = Ext.getStore('userAccountLocalStore').getAt(0);
-    var addressList = userDetails.getData().address;
+    var addressList = userDetails.get('address');
     var address = _.find(addressList, function(item) {
       return item._id == addressId;
     });
@@ -60,7 +60,7 @@ Ext.define('Pyo.customer.controller.user.AddressController', {
   _onDeleteButtonClick: function(button, e, eOpts) {
     var form = button.up('formpanel');
     var address = Ext.create('customer.model.address', form.getValues());
-    var url = Pyo.customer.util.Constants.SERVER_URL.concat('/users/address/', this.getAddressId());
+    var url = Customer.util.Constants.SERVER_URL.concat('/users/', this.getUserId(), '/address/', this.getAddressId());
     var method = 'DELETE';
     Ext.Ajax.request({
       url: url,
@@ -74,8 +74,8 @@ Ext.define('Pyo.customer.controller.user.AddressController', {
 
   _getGeoCodeForAddress: function(address) {
     console.log(address);
-    var geoCodeUri = Pyo.customer.util.Constants.GOOGLE_GEOCODE_URI;
-    var apiKey = Pyo.customer.util.Constants.GOOGLE_GEOCODE_ANDROID_API_KEY;
+    var geoCodeUri = Customer.util.Constants.GOOGLE_GEOCODE_URI;
+    var apiKey = Customer.util.Constants.GOOGLE_GEOCODE_ANDROID_API_KEY;
     var url = geoCodeUri + 'address=';
     var addressKey = {
       address1: null,
@@ -111,7 +111,7 @@ Ext.define('Pyo.customer.controller.user.AddressController', {
       return;
     }
 
-    var url = Pyo.customer.util.Constants.SERVER_URL + '/users/address';
+    var url = Customer.util.Constants.SERVER_URL + '/users/' + this.getUserId() + '/address';
     var method = this.getAddressId() ? 'PUT' : 'POST';
     url += this.getAddressId() ? '/' + this.getAddressId() : '';
     Ext.Ajax.request({
@@ -140,7 +140,7 @@ Ext.define('Pyo.customer.controller.user.AddressController', {
     var user = Ext.getStore('userAccountLocalStore');
     user.removeAll(true);
     user.add(Ext.decode(conn.responseText));
-    this.redirectTo();
+    this.redirectTo('users/account');
   },
 
   _onAddressCreateFailure: function(conn, response, options, eOpts) {

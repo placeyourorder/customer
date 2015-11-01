@@ -7,11 +7,11 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.store.user.UserAccountStore', {
+Ext.define('Customer.store.user.UserAccountStore', {
   extend: 'Ext.data.Store',
 
   config: {
-    model: 'Pyo.customer.model.user.UserAccountModel',
+    model: 'Customer.model.user.UserAccountModel',
     proxy: {
       type: 'ajax',
     }

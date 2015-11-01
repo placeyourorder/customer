@@ -2,12 +2,12 @@
  * @Author: renjithks
  * @Date:   2015-08-22 17:09:26
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-23 23:48:15
+ * @Last Modified time: 2015-10-22 12:24:11
  */
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.cart.CheckoutController', {
+Ext.define('Customer.controller.cart.CheckoutController', {
   extend: 'Ext.app.Controller',
 
   config: {
@@ -16,34 +16,82 @@ Ext.define('Pyo.customer.controller.cart.CheckoutController', {
       'stores/:storeId/cart/checkout': '_showView'
     },
     refs: {
-      orderCheckoutView: 'ordercheckout-view',
-      itemListView: '#ordercheckout-view #list',
-      orderSubmitButton: '#ordercheckout-view #submit-button'
+      cartCheckoutView: '#cart-checkout',
+      checkoutButtons: '#cart-checkout #checkout-segmented-btns'
     },
     control: {
-      orderSubmitButton: {
-        tap: '_orderSubmit'
+      checkoutButtons: {
+        toggle: '_onCheckoutSegmentedBtnTap'
       }
+    },
+    cards: {
+      'address' : 0,
+      'instructions': 1,
+      'delivery_slot': 2,
+      'payment': 3,
+      'review': 4
     }
   },
 
   _showView: function(storeId) {
+
     var me = this;
+    var view = this.getCartCheckoutView();
+    if (null == view) {
+      view = Ext.create('Customer.view.cart.CheckoutView');
+    }
+    Ext.Viewport.setActiveItem(view);
     var store = Ext.getStore('cartStore');
-    this.setStoreId(storeId);
-    this._showOrder(store);
+    var cart = store.getCartForStore(storeId);
+    var isAddressSet =  false;
+    var isInstructionsSet = false;
+    var isDeliverySlotSet = false;
+    var isPaymentSet = false;
+    var redirectTo = 'address';
+    console.log(cart);
+    if(cart.get('address')._id) {
+      isAddressSet =  true;
+    }
+    if(cart.get('instructions')) {
+      isInstructionsSet = true;
+    }
+    if(cart.get('delivery_slot')) {
+      isDeliverySlotSet = true;
+    }
+    if(cart.get('payment')) {
+      isPaymentSet = true;
+    }
+    var isOrderReadyToReview = (isAddressSet && isInstructionsSet && isPaymentSet && isDeliverySlotSet);
+    redirectTo = isAddressSet ? 'instructions' : redirectTo;
+    redirectTo = (isAddressSet && isInstructionsSet) ? 'delivery_slot' : redirectTo;
+    redirectTo = (isAddressSet && isInstructionsSet && isDeliverySlotSet) ? 'payment' : redirectTo;
+    redirectTo = isOrderReadyToReview ? 'review' : redirectTo;
+
+    var btns = this.getCheckoutButtons();
+    btns.setPressedButtons([this.getCards()[redirectTo]]);
+    btns.getAt(0).setDisabled(!isAddressSet);
+    btns.getAt(1).setDisabled(!isInstructionsSet);
+    btns.getAt(2).setDisabled(!isDeliverySlotSet);
+    btns.getAt(3).setDisabled(!isPaymentSet);
+    btns.getAt(4).setDisabled(!isOrderReadyToReview);
+    view.down('#cards').setActiveItem(this.getCards()[redirectTo]);
+  },
+
+  _onCheckoutSegmentedBtnTap: function(container, button, pressed) {
+    if(pressed) {
+      var btnIndex = this.getCheckoutButtons().indexOf(button);
+      this.getCartCheckoutView().down('#cards').setActiveItem(btnIndex);
+    }
   },
 
   _showOrder: function(store) {
     var view;
     if (null == this.getOrderCheckoutView()) {
-      view = Ext.create('Pyo.customer.view.cart.CheckoutView');
+      view = Ext.create('Customer.view.cart.CheckoutView');
     } else {
       this.getOrderCheckoutView().destroy();
-      view = Ext.create('Pyo.customer.view.cart.CheckoutView');
+      view = Ext.create('Customer.view.cart.CheckoutView');
     }
-    var cart = store.getCartForStore(this.getStoreId());
-    view.setData(cart);
     Ext.Viewport.setActiveItem(view);
   },
 
@@ -74,7 +122,7 @@ Ext.define('Pyo.customer.controller.cart.CheckoutController', {
     });
     var me = this;
     Ext.Ajax.request({
-      url: Pyo.customer.util.Constants.SERVER_URL + '/stores/' + this.getStoreId() + '/orders',
+      url: Customer.util.Constants.SERVER_URL + '/stores/' + this.getStoreId() + '/orders',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

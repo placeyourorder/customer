@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.model.SessionModel', {
+Ext.define('Customer.model.SessionModel', {
   extend: 'Ext.data.Model',
   config: {
     identifier: 'uuid',

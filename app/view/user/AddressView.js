@@ -5,8 +5,8 @@
  * @Last Modified time: 2015-08-20 02:15:22
  */
 
-Ext.define('Pyo.customer.view.user.AddressView', {
-  extend: 'Pyo.customer.view.Main',
+Ext.define('Customer.view.user.AddressView', {
+  extend: 'Customer.view.Main',
   alias: 'widget.user-address',
   config: {
     id: 'user-address',

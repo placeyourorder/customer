@@ -2,9 +2,9 @@
  * @Author: renjithks
  * @Date:   2015-06-30 22:19:17
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-23 02:11:28
+ * @Last Modified time: 2015-10-21 22:10:13
  */
-Ext.define('Pyo.customer.model.CartModel', {
+Ext.define('Customer.model.CartModel', {
   extend: 'Ext.data.Model',
   config: {
     fields: ['store_id', 'order_type', 'address', 'store_details', 'lineItems', {
@@ -22,17 +22,9 @@ Ext.define('Pyo.customer.model.CartModel', {
         return orderTotal.toFixed(2);
       }
     }],
-    hasMany: {
-      model: 'LineItems',
-      name: 'lineItems'
-    },
     hasOne: {
       model: 'customer.model.address',
       name: 'address'
-    },
-    hasOne: {
-      model: 'StoreDetails',
-      name: 'store_details'
     }
   }
 });
@@ -45,7 +37,7 @@ Ext.define('StoreDetails', {
       model: 'customer.model.address',
       name: 'address'
     },
-    belongsTo: 'Pyo.customer.model.CartModel'
+    belongsTo: 'Customer.model.CartModel'
   }
 });
 
@@ -54,11 +46,11 @@ Ext.define('LineItems', {
   extend: 'Ext.data.Model',
   config: {
     fields: ['item_id', 'store_id', 'name', 'quantity', 'price', 'total_price'],
-    belongsTo: 'Pyo.customer.model.CartModel',
-    hasOne: {
-      model: 'Variant',
-      name: 'variant'
-    }
+    belongsTo: 'Customer.model.CartModel',
+    // hasOne: {
+    //   model: 'Variant',
+    //   name: 'variant'
+    // }
   }
 });
 

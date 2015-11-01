@@ -7,7 +7,7 @@
 
 'use strict';
 
-Ext.define('Pyo.customer.controller.user.UserForgotPasswordController', {
+Ext.define('Customer.controller.user.UserForgotPasswordController', {
   extend: 'Ext.app.Controller',
 
   config: {
@@ -28,14 +28,14 @@ Ext.define('Pyo.customer.controller.user.UserForgotPasswordController', {
   _forgotpassword: function() {
     var view = this.getUserForgotPasswordView();
     if(!view) {
-      view = Ext.create('Pyo.customer.view.user.UserForgotPasswordView');
+      view = Ext.create('Customer.view.user.UserForgotPasswordView');
     }
     Ext.Viewport.add(view);
   },
 
   _onSubmitButtonClick: function(button, e, eOpts) {
     var form = button.up('formpanel');
-    var user = Ext.create('Pyo.customer.model.UserForgotPasswordModel', form.getValues());
+    var user = Ext.create('Customer.model.UserForgotPasswordModel', form.getValues());
     console.log(user);
     var errors = user.validate();
     if (!errors.isValid()) {
@@ -53,7 +53,7 @@ Ext.define('Pyo.customer.controller.user.UserForgotPasswordController', {
 
   _restoreUser: function(user) {
     Ext.Ajax.request({
-      url: Pyo.customer.util.Constants.SERVER_URL + '/users/restore',
+      url: Customer.util.Constants.SERVER_URL + '/users/restore',
       method: 'POST',
       params: {
         email: user.get('Email'),
