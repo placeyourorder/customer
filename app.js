@@ -10,72 +10,104 @@
     will need to resolve manually.
 */
 
+Ext.Loader.setPath({
+  'Ext': 'touch/src',
+  'Ext.ux': 'app/ux',
+  'Customer': 'app'
+});
+
 Ext.application({
-  name: 'customer',
+  name: 'Customer',
 
   requires: [
     'Ext.MessageBox'
   ],
 
-  controllers: [
-    'Pyo.customer.controller.MainController',
-    'Pyo.customer.controller.MainMenuController',
-    'Pyo.customer.controller.StoreListController',
-    'Pyo.customer.controller.ItemListController',
-    'Pyo.customer.controller.CartController',
-    'Pyo.customer.controller.order.OrderListController',
-    'Pyo.customer.controller.CategoryController',
-    'Pyo.customer.controller.user.UserRegistrationController',
-    'Pyo.customer.controller.user.UserLoginController',
-    'Pyo.customer.controller.UserLogoutController',
-    'Pyo.customer.controller.user.UserAccountController',
-    'Pyo.customer.controller.user.AddressController',
-    'Pyo.customer.controller.cart.CheckoutController',
-    'Pyo.customer.controller.order.OrderDetailsController'
-    'Pyo.customer.controller.user.UserForgotPasswordController'
-  ],
+   controllers: [
+    'MainController',
+    'MainMenuController',
+    'store.StoreListController',
+    'store.ItemSearchController',
+    'item.ItemDetailsController',
+    'ItemListController',
+    'CartController',
+    'order.OrderListController',
+    'CategoryController',
+    'user.UserRegistrationController',
+    'user.UserLoginController',
+    'UserLogoutController',
+    'user.UserAccountController',
+    'user.AddressController',
+    'cart.CheckoutController',
+    'order.OrderDetailsController',
+    'user.UserForgotPasswordController',
+    'cart.CartListController',
+    'cart.CartAddressController',
+    'cart.CartReviewController',
+    'cart.CartAddressController',
+    'cart.CartDeliverySlotController',
+    'cart.CartInstructionsController',
+    'cart.CartPaymentController'
+   ],
 
   views: [
-    'Pyo.customer.view.Main',
-    'Pyo.customer.view.MainMenu',
-    'Pyo.customer.view.StoreListView',
-    'Pyo.customer.view.ItemListView',
-    'Pyo.customer.view.CartView',
-    'Pyo.customer.view.order.OrderListView',
-    'Pyo.customer.view.order.OrderDetailsView',
-    'Pyo.customer.view.CategoryView',
-    'Pyo.customer.view.user.UserRegistrationView',
-    'Pyo.customer.view.user.UserLoginView',
-    'Pyo.customer.view.user.UserAccountView',
-    'Pyo.customer.view.user.AddressView',
-    'Pyo.customer.view.cart.CheckoutView',
-    'Pyo.customer.view.user.UserForgotPasswordView'
+    'Templates',
+    'Main',
+    'MainMenu',
+    'user.AddressListView',
+    'StoreListView',
+    'ItemListView',
+    'item.ItemGridView',
+    'item.ItemSearchView',
+    'item.ItemDetailView',
+    'CartView',
+    'order.OrderListView',
+    'order.OrderDetailsView',
+    'CategoryView',
+    'user.UserRegistrationView',
+    'user.UserLoginView',
+    'user.UserAccountView',
+    'user.AddressView',
+    'cart.CheckoutView',
+    'user.UserForgotPasswordView',
+    'cart.CartListView',
+    'cart.CartAddressView',
+    'cart.CartReviewView',
+    'cart.CartAddressView',
+    'cart.CartDeliverySlotView',
+    'cart.CartInstructionsView',
+    'cart.CartPaymentView'
   ],
 
   models: [
-    'Pyo.customer.model.StoreModel',
-    'Pyo.customer.model.ItemModel',
-    'Pyo.customer.model.CartModel',
-    'Pyo.customer.model.CategoryModel',
-    'Pyo.customer.model.UserRegistrationModel',
-    'Pyo.customer.model.UserLoginModel',
-    'Pyo.customer.model.LocationModel',
-    'Pyo.customer.model.order.OrderModel',
-    'Pyo.customer.model.user.UserAccountLocalStorageModel',
-    'Pyo.customer.model.user.UserAccountModel',
-    'Pyo.customer.model.UserForgotPasswordModel',
-    //'address'
+    'StoreModel',
+    'ItemModel',
+    'ItemSearchModel',
+    'ItemSearchHistoryModel',
+    'CartModel',
+    'CategoryModel',
+    'UserRegistrationModel',
+    'UserLoginModel',
+    'LocationModel',
+    'order.OrderModel',
+    'user.UserAccountLocalStorageModel',
+    'user.UserAccountModel',
+    'UserForgotPasswordModel',
+    'CategoryModel'
   ],
 
   stores: [
-    'Pyo.customer.store.StoreListStore',
-    'Pyo.customer.store.ItemListStore',
-    'Pyo.customer.store.CartStore',
-    'Pyo.customer.store.order.OrderStore',
-    'Pyo.customer.store.CategoryStore',
-    'Pyo.customer.store.LocationStore',
-    'Pyo.customer.store.user.UserAccountStore',
-    'Pyo.customer.store.user.UserAccountLocalStorageStore'
+    'user.AddressStore',
+    'StoreListStore',
+    'ItemStore',
+    'ItemSearchHistoryStore',
+    'CartStore',
+    'order.OrderStore',
+    'CategoryStore',
+    'LocationStore',
+    'user.UserAccountStore',
+    'user.UserAccountLocalStorageStore',
+    'CategoryStore'
   ],
 
   icon: {
@@ -102,6 +134,23 @@ Ext.application({
   },
 
   launch: function() {
+    // <debug>
+    try {
+      /**
+       * init() defaults to "http://local.senchainspector.com:1839"
+       * so we don't have to pass a URL
+       */
+      //SenchaInspector.init();
+
+
+      /**
+       * NOTE: The URL needs to match what you defined in app.json.
+       * If you connected app.json via a machine name or IP address,
+       * you'll need to explicitly configure that here too
+       */
+      // SenchaInspector.init('http:localhost:1839');
+    } catch (e) {}
+    // </debug>
     //Fires before a network request is made to retrieve a data object.
     Ext.Ajax.on('beforerequest', function(con, opt) {
       //To show the mask
@@ -122,14 +171,17 @@ Ext.application({
     Ext.Ajax.on('requestexception', function(con, response, opt) {
       //To hide the mask
       Ext.Viewport.setMasked(false);
-
     }, this);
 
-    Ext.create('Pyo.customer.store.LocationStore', {
+    Ext.create('Customer.store.CategoryStore', {
+      storeId: 'CategoryStore'
+    });
+
+    Ext.create('Customer.store.LocationStore', {
       storeId: 'locationLocalStore'
     });
 
-    Ext.create('Pyo.customer.store.user.UserAccountLocalStorageStore', {
+    Ext.create('Customer.store.user.UserAccountLocalStorageStore', {
       storeId: 'userAccountLocalStore'
     });
 
@@ -160,10 +212,14 @@ Ext.application({
 
     this.geoLocation = geoLocation;
     geoLocation.updateLocation();
+    Ext.create('Customer.store.CategoryStore', {
+      storeId: 'CategoryStore'
+    });
     Ext.fly('appLoadingIndicator').destroy();
 
     // Initialize the main view
-    //Ext.Viewport.add(Ext.create('Pyo.customer.view.Main'));
-    //this.redirectTo('stores');
+    //Ext.Viewport.add(Ext.create('Customer.view.Main'));
+    console.log('Redirecting to login');
+    //this.redirectTo('users/register');
   }
 });

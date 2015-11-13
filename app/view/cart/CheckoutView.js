@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-22 18:28:29
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-10-21 23:14:26
+ * @Last Modified time: 2015-11-05 00:41:38
  */
 
 Ext.define('Customer.view.cart.CheckoutView', {
@@ -20,18 +20,23 @@ Ext.define('Customer.view.cart.CheckoutView', {
       width: '100%',
       layout: 'hbox',
       items: [{
+        itemId: 'address',
         iconCls: 'map-pin',
         flex: 1,
       }, {
+        itemId: 'instructons',
         iconCls: 'asterisk',
         flex: 1,
       }, {
+        itemId: 'delivery-slot',
         iconCls: 'clock-o',
         flex: 1
       }, {
+        itemId: 'payment',
         iconCls: 'credit-card',
         flex: 1
       }, {
+        itemId: 'check',
         iconCls: 'check',
         flex: 1
       }]
@@ -50,11 +55,6 @@ Ext.define('Customer.view.cart.CheckoutView', {
       }, {
         xtype: 'cart-review-view',
       }]
-    }, {
-      xtype: 'button',
-      height: '44px',
-      text: 'Next',
-      docked: 'bottom'
     }]
   }
 });

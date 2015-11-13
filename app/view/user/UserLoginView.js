@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-06 10:28:36
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-08-16 15:27:36
+ * @Last Modified time: 2015-11-11 18:35:57
  */
 
 'use strict';
@@ -23,11 +23,14 @@ Ext.define('Customer.view.user.UserLoginView', {
     }, {
       xtype: 'formpanel',
       flex: 1,
+      scrollable: false,
       items: [{
         xtype: 'emailfield',
         name: 'Email',
         placeHolder: 'Email',
-        margin: 10
+        margin: 10,
+        label: '',
+        labelCls: 'user'
       }, {
         xtype: 'passwordfield',
         name: 'Password',
@@ -37,7 +40,7 @@ Ext.define('Customer.view.user.UserLoginView', {
         xtype: 'button',
         itemId: 'login',
         text: 'Login',
-        cls: 'button',
+        cls: ['md-button', 'md-raised'] ,
         margin: 10
       }]
     }, {

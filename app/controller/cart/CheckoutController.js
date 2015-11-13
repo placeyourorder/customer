@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-22 17:09:26
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-10-22 12:24:11
+ * @Last Modified time: 2015-11-03 02:01:17
  */
 
 'use strict';
@@ -37,6 +37,7 @@ Ext.define('Customer.controller.cart.CheckoutController', {
 
     var me = this;
     var view = this.getCartCheckoutView();
+    this.setStoreId(storeId);
     if (null == view) {
       view = Ext.create('Customer.view.cart.CheckoutView');
     }

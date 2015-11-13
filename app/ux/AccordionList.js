@@ -793,14 +793,16 @@ Ext.define('Ext.ux.AccordionList', {
 
         var items = list.listItems,
             ln = items.length,
-            i, item, record, elem, indent;
+            i, item, record, elem, indent, padding;
 
         for (i = 0; i < ln; i++) {
             item = items[i];
             record = item.getRecord();
             if (!Ext.isEmpty(record)) {
                 elem = item.element.down('.x-innerhtml');
-                indent = ((record.getDepth() + 0.5) - 1) + 'em';
+                padding = record.isLeaf() ? 2.0 : 0.5;
+                indent = ((record.getDepth() + padding) - 1) + 'em';
+                console.log(record);
                 // 2.1
                 // elem = item.element.down('.x-list-item-body .x-innerhtml');
                 // indent = ((record.getDepth()) -1) + 'em';

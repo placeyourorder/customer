@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-10-22 12:48:02
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-11-01 23:18:50
+ * @Last Modified time: 2015-11-09 20:36:18
  */
 
 'use strict';
@@ -59,7 +59,7 @@ Ext.define('Customer.view.user.AddressListView', {
   config: {
     itemId: 'addresslistitem',
     storeId: null,
-    layout: 'fit',
+    //layout: 'fit',
     cls: 'addresslistitem-cls',
 
     dataMap: {

@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-10-17 22:43:50
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-10-18 02:40:43
+ * @Last Modified time: 2015-11-03 01:50:54
  */
 
 'use strict';
@@ -72,5 +72,9 @@ Ext.define('Customer.controller.item.ItemDetailsController', {
     var item = this.getItemDetails();
     var cart =  Ext.getStore('cartStore');
     cart.addItem(item, this.getVariantId(), 1);
+    Ext.create('Ext.ux.Toast', {
+      message: 'Item added!',
+      toastDuration: 'SHORT'
+    });
   }
 });

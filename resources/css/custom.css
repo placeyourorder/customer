@@ -13,7 +13,7 @@ html, body {
 }
 
 #user-registration, #user-login{
-  background-color: #4abce7;
+
 }
 
 #user-registration .x-field-input,
@@ -41,47 +41,38 @@ html, body {
 
 .main-menu .x-button {
   height: 44px;
+  margin: 0px;
 }
 
 .main-title-bar {
-  background-color: black;
   height: 44px;
 }
 
-.x-toolbar .x-title {
-  color: white;
-}
 
 .menu-item {
   font-size: smaller;
-  color: white;
-  border-bottom: 1px solid grey;
 }
 
 .menu-item .x-button-icon:before {
-  /*color: #FFFFFF;*/
+  color: #FFFFFF;
   font-weight: 100
 }
 .menu-item .x-button-label {
+  color: #FFFFFF;
   font-size: small;
   font-weight: 500;
+  padding-left: 10px;
+  text-align: left;
 }
 
 .menu-item {
   margin-bottom: 0px !important;
 }
 
-.menu-item .x-button-label,
-.main-title-bar .x-button-icon:before {
-  color: white;
-}
-
- .main-title-bar .x-button {
+.x-toolbar.x-toolbar-dark .x-button:focus,
+.x-toolbar.x-toolbar-dark .x-button:hover,
+.main-title-bar .x-button {
   background-color: transparent;
- }
-
- .title-bar .x-button-icon:before {
-  color: white;
  }
 
 .x-badge {
@@ -108,7 +99,7 @@ html, body {
 
 #cart-view .x-dataview .x-button,
 #user-account .x-dataview .x-button {
-  background-color: transparent;
+  /*background-color: transparent;*/
 }
 
 
@@ -165,6 +156,15 @@ a:-webkit-any-link {
 .order-list .x-list-item {
   margin: 5px 0px;
   color: white;
+}
+
+.main-menu .x-list-item  {
+ color: white;
+ border-top:0px !important;
+}
+
+.main-menu .x-list-footer-wrap {
+  border-bottom: 1px solid grey !important;
 }
 
 
@@ -275,4 +275,50 @@ a:-webkit-any-link {
 
 #item-grid-view {
   background-color: #ffffff;
+}
+
+/*
+ * Styles for toast container. Color to map to Android Material Design guidelines.
+ */
+.pyo-toast {
+    min-height: 25px;
+    max-height: 25px;
+    margin: 0 15px;
+    padding: 5px;
+    background-color: #323232;
+    text-align: center;
+}
+
+/*
+ * Styles for message in toast. Change the font/font-size if needed.
+ */
+.pyo-toast-msg {
+    color: white;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*
+ * Styles for action button in toast. Change the color/properties if needed.
+ */
+.pyo-toast-action-btn {
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    padding: 0px !important;
+    background: transparent !important;
+    border: 0px !important;
+    color: rgb(255,255,66);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.x-menu .x-button {
+     margin-bottom: 0px; 
+}
+
+.x-menu {
+  background-color: #383A3F;
 }

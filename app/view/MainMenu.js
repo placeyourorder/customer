@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-10 16:49:42
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-10-17 15:21:54
+ * @Last Modified time: 2015-11-10 17:42:59
  */
 
 'use strict';
@@ -14,38 +14,36 @@ Ext.define('Customer.view.MainMenu', {
   config: {
     id: 'main-menu',
     cls: 'main-menu',
-    width: '40%',
+    width: '50%',
     layout: 'vbox',
+    defaults: {
+        cls: ['md-trasparent', 'menu-item']
+    },
     items: [{
       xtype: 'button',
       iconCls: 'browser',
       itemId: 'menuItemStore',
-      html: 'Stores',
-      cls: 'menu-item'
+      html: 'Stores'
     }, {
       xtype: 'button',
       iconCls: 'box',
       html: 'Orders',
-      itemId: 'menuItemOrders',
-      cls: 'menu-item',
+      itemId: 'menuItemOrders'
     }, {
       xtype: 'button',
       iconCls: 'cart',
       html: 'Carts',
-      itemId: 'menuItemCarts',
-      cls: 'menu-item'
+      itemId: 'menuItemCarts'
     }, {
       xtype: 'button',
       iconCls: 'user',
       html: 'Account',
-      itemId: 'menuItemAccount',
-      cls: 'menu-item'
+      itemId: 'menuItemAccount'
     }, {
       xtype: 'button',
       iconCls: 'power',
       html: 'Logout',
-      itemId: 'menuItemLogout',
-      cls: 'menu-item'
+      itemId: 'menuItemLogout'
     }, {
       xtype: 'accordionlist',
       itemId: 'menuCategory',
@@ -59,7 +57,10 @@ Ext.define('Customer.view.MainMenu', {
       },
       singleMode: true,
       indent: true,
-      flex: 1
+      flex: 1,
+      useSelectedHighlights: false,
+      showCount: true,
+      cls: ['x-accordion-list']
     }]
   }
 });

@@ -7,14 +7,15 @@
       "packager": "cordova",
       "cordova": {
         "config": {
+          // Uncomment the line below and add the platforms you wish to build for
           "platforms": "android",
+
           "id": "com.pyo.customer",
-          "name": "customer"
+          "name": "Customer"
         }
       }
     }
   },
-
 
   /**
    * The application's namespace, used by Sencha Command to generate classes
@@ -59,8 +60,8 @@
     "path": "touch/sencha-touch.js",
     "x-bootstrap": true
   }, {
-    "path": "lib/underscore-min.js",
-    "x-bootstrap": true
+    "path": "lib/underscore-min.js"
+      //"x-bootstrap": true
   }, {
     "path": "bootstrap.js",
     "x-bootstrap": true
@@ -145,7 +146,7 @@
   /**
    * List of package names to require for the cmd build process
    */
-  "requires": [],
+  "requires": ["Material"],
 
   /**
    * Uniquely generated id for this application, used as prefix for localStorage keys.

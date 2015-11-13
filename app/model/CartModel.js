@@ -2,15 +2,12 @@
  * @Author: renjithks
  * @Date:   2015-06-30 22:19:17
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-10-21 22:10:13
+ * @Last Modified time: 2015-11-07 18:15:42
  */
 Ext.define('Customer.model.CartModel', {
   extend: 'Ext.data.Model',
   config: {
-    fields: ['store_id', 'order_type', 'address', 'store_details', 'lineItems', {
-      name: 'phone',
-      defaultValue: 98989898989
-    }, {
+    fields: ['store_id', 'order_type', 'address', 'store_details', 'lineItems', 'phone', 'instructions', 'payment', 'delivery_slot', {
       name: 'total_price',
       persist: true,
       convert: function(v, r) {
@@ -21,11 +18,7 @@ Ext.define('Customer.model.CartModel', {
         });
         return orderTotal.toFixed(2);
       }
-    }],
-    hasOne: {
-      model: 'customer.model.address',
-      name: 'address'
-    }
+    }]
   }
 });
 

@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-05 21:25:11
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-11-02 00:35:16
+ * @Last Modified time: 2015-11-03 01:49:30
  */
 
 'use strict';
@@ -78,6 +78,10 @@ Ext.define('Customer.controller.user.UserRegistrationController', {
   _onRegistrationSuccess: function() {
     Ext.Viewport.remove(Ext.Viewport.getActiveItem(), true);
     this.redirectTo('users/login');
+    Ext.create('Ext.ux.Toast', {
+      message: 'Registration success!',
+      toastDuration: 'SHORT'
+    });
   },
 
   _onRegistrationFailure: function(conn, response, options, eOpts) {

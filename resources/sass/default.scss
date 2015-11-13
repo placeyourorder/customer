@@ -3,6 +3,11 @@ $dark-theme: false;
 /*$base-color: #4abce7;*/
 @import 'sencha-touch/mountainview';
 @import 'sencha-touch/mountainview/all';
+//@import 'sencha-touch/default';
+//@import 'sencha-touch/default/all';
+
+@import '../../packages/Material/sass/src/Material.scss';
+@include md-ripple;
 
 @include icon-font('FAIcons', inline-font-files(
 'fontAwesome/fontawesome-webfont.woff', woff,
@@ -11,16 +16,24 @@ $dark-theme: false;
 'fontAwesome/fontawesome-webfont.eot', eot
 ));
 
+@include md-button;
+@include md-text-field;
+@include md-toggle;
+//@include md-slide;
+@include md-tab;
+@include md-checkbox;
+@include md-message-box;
+@include md-progress-circular;
+@include md-toolbar;
+@include md-select;
+@include md-date-picker;
 
-@include icon('search');
 @include icon('list');
-@include icon('cart');
 @include icon('trash');
 @include icon('add');
 @include icon('minus2');
 @include icon('browser');
 @include icon('box');
-@include icon('user');
 @include icon('power');
 @include icon('pencil');
 @include icon("rupee", '\f156', "FAIcons");
@@ -30,6 +43,10 @@ $dark-theme: false;
 @include icon("check", '\f00c', "FAIcons");
 @include icon("clock-o", '\f017', "FAIcons");
 @include icon("check", '\f00c', "FAIcons");
+@include icon("menu", '\f0c9', "FAIcons");
+@include icon('search', '\f002', "FAIcons");
+@include icon('cart', '\f07a', "FAIcons");
+@include icon('user', '\f007', "FAIcons");
 
 
 .rupeeCls:before {
@@ -72,3 +89,16 @@ $dark-theme: false;
 }
 
 @include accordionlist;
+
+.x-toolbar.x-toolbar-dark .x-button {
+  min-width: 32px !important;
+  margin: 0px !important;
+}
+
+.x-toolbar.x-toolbar-dark .x-button:hover,
+.x-toolbar .x-button-icon:before,
+.x-toolbar .x-title {
+  background-color: transparent !important;
+  color: $md-white-100;
+  margin-top: 0px !important;
+}

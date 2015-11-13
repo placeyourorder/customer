@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-06-21 22:53:57
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-10-17 23:59:59
+ * @Last Modified time: 2015-11-11 01:20:21
  */
 
 Ext.define('Customer.view.Main', {
@@ -27,7 +27,7 @@ Ext.define('Customer.view.Main', {
       layout: 'hbox',
       items: [{
         itemId: 'menu-button',
-        iconCls: 'list',
+        iconCls: 'menu',
         align: 'left'
       }]
     });

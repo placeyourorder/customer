@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-16 15:35:44
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-11-02 00:18:08
+ * @Last Modified time: 2015-11-03 00:55:04
  */
 
 'use strict';
@@ -33,12 +33,10 @@ Ext.define('Customer.controller.user.UserAccountController', {
     var me = this;
     console.log('In show view');
     var view = me.getAccountView();
-    if(!view) {
-      //view.destroy();
-      console.log('Creating view');
-      view = Ext.create('Customer.view.user.UserAccountView');
+    if(view) {
+      view.destroy();
     }
-    //view = Ext.create('Customer.view.user.UserAccountView');
+    view = Ext.create('Customer.view.user.UserAccountView');
     var userDetails = Ext.getStore('userAccountLocalStore').getAt(0);
     view.setData(userDetails);
     Ext.Viewport.setActiveItem(view);

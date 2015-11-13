@@ -2,7 +2,7 @@
  * @Author: renjithks
  * @Date:   2015-08-17 15:44:31
  * @Last Modified by:   renjithks
- * @Last Modified time: 2015-11-02 00:19:53
+ * @Last Modified time: 2015-11-03 01:51:51
  */
 
 'use strict';
@@ -45,6 +45,7 @@ Ext.define('Customer.controller.user.AddressController', {
     var address = _.find(addressList, function(item) {
       return item._id == addressId;
     });
+    view.down('#delete').setHidden(!this.getAddressId());
     view.down("#addressPanel").reset();
     view.setData(address);
     Ext.Viewport.setActiveItem(view);
@@ -107,7 +108,7 @@ Ext.define('Customer.controller.user.AddressController', {
       address.set('latitude', result.results[0].geometry.location.lat);
       address.set('longitude', result.results[0].geometry.location.lng);
     } else {
-      Ext.Msg('Error geo tagging your address');
+      Ext.Msg.alert('Error geo tagging your address');
       return;
     }
 
@@ -141,6 +142,10 @@ Ext.define('Customer.controller.user.AddressController', {
     user.removeAll(true);
     user.add(Ext.decode(conn.responseText));
     this.redirectTo('users/account');
+    Ext.create('Ext.ux.Toast', {
+      message: 'Successfully saved address',
+      toastDuration: 'SHORT'
+    });
   },
 
   _onAddressCreateFailure: function(conn, response, options, eOpts) {
@@ -155,7 +160,12 @@ Ext.define('Customer.controller.user.AddressController', {
     user.removeAll(true);
     user.add(Ext.decode(conn.responseText));
     console.log(this.getPreviousPage());
-    this.redirectTo(this.getPreviousPage());
+    //this.redirectTo(this.getPreviousPage());
+    this.redirectTo('users/account');
+    Ext.create('Ext.ux.Toast', {
+      message: 'Successfully deleted address',
+      toastDuration: 'SHORT'
+    });
   },
 
   _onAddressDeleteFailure: function(conn, response, options, eOpts) {

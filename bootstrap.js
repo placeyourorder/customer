@@ -9,8 +9,14 @@
  * metadata-driven class system features
  */
 Ext.Loader.addClassPathMappings({
-  "Address": "app/model/OrderModel.js",
-  "CartDataItems": "app/view/CartView.js",
+  "AddressInnerItem": "app/view/user/AddressListView.js",
+  "CartInnerItem": "app/view/CartView.js",
+  "CartItem": "app/view/CartView.js",
+  "CartListInnerItem": "app/view/cart/CartListView.js",
+  "CartListItem": "app/view/cart/CartListView.js",
+  "Customer": "app",
+  "Customer.controller.CageNavigationController": "app/controller/NavigationController.js",
+  "Customer.store.SessionInfo": "app/store/SessionStore.js",
   "Ext": "touch/src",
   "Ext-more": "touch/src/core/Ext-more.js",
   "Ext.Boot": ".sencha/app/Boot.js",
@@ -35,17 +41,130 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLResultSetRowList": "touch/src/device/sqlite/Sencha.js",
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js",
   "Ext.draw.engine.SvgContext.Gradient": "touch/src/draw/engine/SvgContext.js",
+  "Ext.ux.AccordionList": "app/ux/AccordionList.js",
+  "Ext.ux.AccordionListItem": "app/ux/AccordionListItem.js",
+  "Ext.ux.Toast": "app/ux/Toast.js",
   "ItemListDataView": "app/view/ItemListView.js",
-  "LineItems": "app/model/OrderModel.js",
-  "Pyo.customer": "app",
-  "Pyo.customer.controller.CageNavigationController": "app/controller/NavigationController.js",
-  "Pyo.customer.store.SessionInfo": "app/store/SessionStore.js",
-  "Variant": "app/model/OrderModel.js"
+  "LineItem": "app/view/order/OrderDetailsView.js",
+  "LineItems": "app/model/CartModel.js",
+  "Load": "app/controller/FieldGroup.js",
+  "Material.components.Button": "packages/Material/src/components/Button.js",
+  "Material.components.Checkbox": "packages/Material/src/components/Checkbox.js",
+  "Material.components.ColorPicker": "packages/Material/src/components/ColorPicker.js",
+  "Material.components.ColorPickerMain": "packages/Material/src/components/ColorPickerMain.js",
+  "Material.components.DatePicker": "packages/Material/src/components/DatePicker.js",
+  "Material.components.Entry": "packages/Material/src/components/Entry.js",
+  "Material.components.List": "packages/Material/src/components/List.js",
+  "Material.components.MessageBox": "packages/Material/src/components/MessageBox.js",
+  "Material.components.ProgressCircular": "packages/Material/src/components/ProgressCircular.js",
+  "Material.components.Slider": "packages/Material/src/components/Slider.js",
+  "Material.components.Tab": "packages/Material/src/components/Tab.js",
+  "Material.components.Toggle": "packages/Material/src/components/Toggle.js",
+  "Material.components.field.DatePicker": "packages/Material/src/components/field/DatePicker.js",
+  "Material.components.field.Field": "packages/Material/src/components/field/Field.js",
+  "Material.components.field.Select": "packages/Material/src/components/field/Select.js",
+  "Material.components.field.SelectPanel": "packages/Material/src/components/field/SelectPanel.js",
+  "Material.components.field.Text": "packages/Material/src/components/field/Text.js",
+  "Material.components.picker.CalendarItem": "packages/Material/src/components/picker/CalendarItem.js",
+  "Material.components.picker.DateDetailsPanel": "packages/Material/src/components/picker/DateDetailsPanel.js",
+  "Material.components.picker.DatePickerSlot": "packages/Material/src/components/picker/DatePickerSlot.js",
+  "Material.helpers.Constants": "packages/Material/src/helpers/Constants.js",
+  "Material.helpers.DatePickerService": "packages/Material/src/helpers/DatePickerService.js",
+  "Material.helpers.RippleService": "packages/Material/src/helpers/RippleService.js",
+  "OrderInnerItem": "app/view/order/OrderDetailsView.js",
+  "StoreDetails": "app/model/CartModel.js",
+  "Variant": "app/model/CartModel.js",
+  "customer": "app"
 });
 
 Ext.ClassManager.addNameAlternateMappings({
-  "Address": [],
-  "CartDataItems": [],
+  "AddressInnerItem": [],
+  "CartInnerItem": [],
+  "CartItem": [],
+  "CartListInnerItem": [],
+  "CartListItem": [],
+  "Customer.controller.CageNavigationController": [],
+  "Customer.controller.CartController": [],
+  "Customer.controller.CategoryController": [],
+  "Customer.controller.FieldGroup": [],
+  "Customer.controller.ItemListController": [],
+  "Customer.controller.MainController": [],
+  "Customer.controller.MainMenuController": [],
+  "Customer.controller.UserLogoutController": [],
+  "Customer.controller.cart.CartAddressController": [],
+  "Customer.controller.cart.CartDeliverySlotController": [],
+  "Customer.controller.cart.CartInstructionsController": [],
+  "Customer.controller.cart.CartListController": [],
+  "Customer.controller.cart.CartPaymentController": [],
+  "Customer.controller.cart.CartReviewController": [],
+  "Customer.controller.cart.CheckoutController": [],
+  "Customer.controller.item.ItemDetailsController": [],
+  "Customer.controller.order.OrderDetailsController": [],
+  "Customer.controller.order.OrderListController": [],
+  "Customer.controller.store.ItemSearchController": [],
+  "Customer.controller.store.StoreListController": [],
+  "Customer.controller.user.AddressController": [],
+  "Customer.controller.user.UserAccountController": [],
+  "Customer.controller.user.UserForgotPasswordController": [],
+  "Customer.controller.user.UserLoginController": [],
+  "Customer.controller.user.UserRegistrationController": [],
+  "Customer.model.CartModel": [],
+  "Customer.model.CategoryModel": [],
+  "Customer.model.ItemModel": [],
+  "Customer.model.ItemSearchHistoryModel": [],
+  "Customer.model.ItemSearchModel": [],
+  "Customer.model.LocationModel": [],
+  "Customer.model.SessionModel": [],
+  "Customer.model.StoreModel": [],
+  "Customer.model.UserForgotPasswordModel": [],
+  "Customer.model.UserLoginModel": [],
+  "Customer.model.UserRegistrationModel": [],
+  "Customer.model.order.OrderModel": [],
+  "Customer.model.user.UserAccountLocalStorageModel": [],
+  "Customer.model.user.UserAccountModel": [],
+  "Customer.store.CartStore": [],
+  "Customer.store.CategoryStore": [],
+  "Customer.store.ItemSearchHistoryStore": [],
+  "Customer.store.ItemSearchStore": [],
+  "Customer.store.ItemStore": [],
+  "Customer.store.LocationStore": [],
+  "Customer.store.OrderStore": [],
+  "Customer.store.SessionInfo": [],
+  "Customer.store.StoreListStore": [],
+  "Customer.store.order.OrderStore": [],
+  "Customer.store.user.AddressStore": [],
+  "Customer.store.user.UserAccountLocalStorageStore": [],
+  "Customer.store.user.UserAccountStore": [],
+  "Customer.util.Constants": [],
+  "Customer.view.CartView": [],
+  "Customer.view.CategoryView": [],
+  "Customer.view.FieldGroup": [
+    "Customer.view.FieldGroup"
+  ],
+  "Customer.view.ItemListView": [],
+  "Customer.view.Main": [],
+  "Customer.view.MainMenu": [],
+  "Customer.view.StoreListView": [],
+  "Customer.view.Templates": [],
+  "Customer.view.cart.CartAddressView": [],
+  "Customer.view.cart.CartDeliverySlotView": [],
+  "Customer.view.cart.CartInstructionsView": [],
+  "Customer.view.cart.CartListView": [],
+  "Customer.view.cart.CartPaymentView": [],
+  "Customer.view.cart.CartReviewView": [],
+  "Customer.view.cart.CheckoutView": [],
+  "Customer.view.fgtest": [],
+  "Customer.view.item.ItemDetailView": [],
+  "Customer.view.item.ItemGridView": [],
+  "Customer.view.item.ItemSearchView": [],
+  "Customer.view.order.OrderDetailsView": [],
+  "Customer.view.order.OrderListView": [],
+  "Customer.view.user.AddressListView": [],
+  "Customer.view.user.AddressView": [],
+  "Customer.view.user.UserAccountView": [],
+  "Customer.view.user.UserForgotPasswordView": [],
+  "Customer.view.user.UserLoginView": [],
+  "Customer.view.user.UserRegistrationView": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
   "Ext.AbstractPlugin": [],
@@ -645,17 +764,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.layout.wrapper.BoxDock": [],
   "Ext.layout.wrapper.Dock": [],
   "Ext.layout.wrapper.Inner": [],
-  "Ext.log.Base": [],
-  "Ext.log.Logger": [],
-  "Ext.log.filter.Filter": [],
-  "Ext.log.filter.Priority": [],
-  "Ext.log.formatter.Default": [],
-  "Ext.log.formatter.Formatter": [],
-  "Ext.log.formatter.Identity": [],
-  "Ext.log.writer.Console": [],
-  "Ext.log.writer.DocumentTitle": [],
-  "Ext.log.writer.Remote": [],
-  "Ext.log.writer.Writer": [],
   "Ext.mixin.Bindable": [],
   "Ext.mixin.Filterable": [],
   "Ext.mixin.Mixin": [],
@@ -753,11 +861,16 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.util.translatable.CssTransform": [],
   "Ext.util.translatable.Dom": [],
   "Ext.util.translatable.ScrollPosition": [],
+  "Ext.ux.AccordionList": [
+    "Ext.AccordionList"
+  ],
+  "Ext.ux.AccordionListItem": [],
   "Ext.ux.ActionOverFlowMenuButton": [],
   "Ext.ux.ApplicationMenu": [],
   "Ext.ux.ContextMenu": [],
   "Ext.ux.MenuButton": [],
   "Ext.ux.TabMenuButton": [],
+  "Ext.ux.Toast": [],
   "Ext.ux.device.Analytics": [],
   "Ext.ux.device.Twitter": [],
   "Ext.ux.device.analytics.Abstract": [],
@@ -781,52 +894,183 @@ Ext.ClassManager.addNameAlternateMappings({
     "Ext.viewport.WP"
   ],
   "ItemListDataView": [],
+  "LineItem": [],
   "LineItems": [],
-  "Pyo.customer.controller.CageNavigationController": [],
-  "Pyo.customer.controller.CartController": [],
-  "Pyo.customer.controller.CategoryController": [],
-  "Pyo.customer.controller.ItemListController": [],
-  "Pyo.customer.controller.MainController": [],
-  "Pyo.customer.controller.MainMenuController": [],
-  "Pyo.customer.controller.OrderListController": [],
-  "Pyo.customer.controller.StoreListController": [],
-  "Pyo.customer.controller.UserLoginController": [],
-  "Pyo.customer.controller.UserRegistrationController": [],
-  "Pyo.customer.model.CartModel": [],
-  "Pyo.customer.model.CategoryModel": [],
-  "Pyo.customer.model.ItemListModel": [],
-  "Pyo.customer.model.LocationModel": [],
-  "Pyo.customer.model.OrderListModel": [],
-  "Pyo.customer.model.OrderModel": [],
-  "Pyo.customer.model.SessionModel": [],
-  "Pyo.customer.model.StoreListModel": [],
-  "Pyo.customer.model.UserLoginModel": [],
-  "Pyo.customer.model.UserRegistrationModel": [],
-  "Pyo.customer.store.CartStore": [],
-  "Pyo.customer.store.CategoryStore": [],
-  "Pyo.customer.store.ItemListStore": [],
-  "Pyo.customer.store.LocationStore": [],
-  "Pyo.customer.store.OrderListStore": [],
-  "Pyo.customer.store.OrderStore": [],
-  "Pyo.customer.store.SessionInfo": [],
-  "Pyo.customer.store.StoreListStore": [],
-  "Pyo.customer.util.Constants": [],
-  "Pyo.customer.view.CartView": [],
-  "Pyo.customer.view.CategoryView": [],
-  "Pyo.customer.view.ItemListView": [],
-  "Pyo.customer.view.Main": [],
-  "Pyo.customer.view.MainMenu": [],
-  "Pyo.customer.view.OrderListView": [],
-  "Pyo.customer.view.StoreListView": [],
-  "Pyo.customer.view.UserLoginView": [],
-  "Pyo.customer.view.UserRegistrationView": [],
-  "Variant": []
+  "Load": [],
+  "Material.components.Button": [],
+  "Material.components.Checkbox": [],
+  "Material.components.ColorPicker": [],
+  "Material.components.ColorPickerMain": [],
+  "Material.components.DatePicker": [],
+  "Material.components.Entry": [],
+  "Material.components.List": [],
+  "Material.components.MessageBox": [],
+  "Material.components.ProgressCircular": [],
+  "Material.components.Slider": [],
+  "Material.components.Tab": [],
+  "Material.components.Toggle": [],
+  "Material.components.field.DatePicker": [],
+  "Material.components.field.Field": [],
+  "Material.components.field.Select": [],
+  "Material.components.field.SelectPanel": [],
+  "Material.components.field.Text": [],
+  "Material.components.picker.CalendarItem": [],
+  "Material.components.picker.DateDetailsPanel": [],
+  "Material.components.picker.DatePickerSlot": [],
+  "Material.helpers.Constants": [],
+  "Material.helpers.DatePickerService": [],
+  "Material.helpers.RippleService": [],
+  "OrderInnerItem": [],
+  "StoreDetails": [],
+  "Variant": [],
+  "customer.model.address": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
-  "Address": [],
-  "CartDataItems": [
-    "widget.cartDataItems"
+  "AddressInnerItem": [
+    "widget.addresstinneritem"
+  ],
+  "CartInnerItem": [
+    "widget.cartinneritem"
+  ],
+  "CartItem": [
+    "widget.cartitem"
+  ],
+  "CartListInnerItem": [
+    "widget.cartListInnerItem"
+  ],
+  "CartListItem": [
+    "widget.cartList"
+  ],
+  "Customer.controller.CageNavigationController": [],
+  "Customer.controller.CartController": [],
+  "Customer.controller.CategoryController": [],
+  "Customer.controller.FieldGroup": [],
+  "Customer.controller.ItemListController": [],
+  "Customer.controller.MainController": [],
+  "Customer.controller.MainMenuController": [],
+  "Customer.controller.UserLogoutController": [],
+  "Customer.controller.cart.CartAddressController": [],
+  "Customer.controller.cart.CartDeliverySlotController": [],
+  "Customer.controller.cart.CartInstructionsController": [],
+  "Customer.controller.cart.CartListController": [],
+  "Customer.controller.cart.CartPaymentController": [],
+  "Customer.controller.cart.CartReviewController": [],
+  "Customer.controller.cart.CheckoutController": [],
+  "Customer.controller.item.ItemDetailsController": [],
+  "Customer.controller.order.OrderDetailsController": [],
+  "Customer.controller.order.OrderListController": [],
+  "Customer.controller.store.ItemSearchController": [],
+  "Customer.controller.store.StoreListController": [],
+  "Customer.controller.user.AddressController": [],
+  "Customer.controller.user.UserAccountController": [],
+  "Customer.controller.user.UserForgotPasswordController": [],
+  "Customer.controller.user.UserLoginController": [],
+  "Customer.controller.user.UserRegistrationController": [],
+  "Customer.model.CartModel": [],
+  "Customer.model.CategoryModel": [],
+  "Customer.model.ItemModel": [],
+  "Customer.model.ItemSearchHistoryModel": [],
+  "Customer.model.ItemSearchModel": [],
+  "Customer.model.LocationModel": [],
+  "Customer.model.SessionModel": [],
+  "Customer.model.StoreModel": [],
+  "Customer.model.UserForgotPasswordModel": [],
+  "Customer.model.UserLoginModel": [],
+  "Customer.model.UserRegistrationModel": [],
+  "Customer.model.order.OrderModel": [],
+  "Customer.model.user.UserAccountLocalStorageModel": [],
+  "Customer.model.user.UserAccountModel": [],
+  "Customer.store.CartStore": [],
+  "Customer.store.CategoryStore": [],
+  "Customer.store.ItemSearchHistoryStore": [],
+  "Customer.store.ItemSearchStore": [],
+  "Customer.store.ItemStore": [],
+  "Customer.store.LocationStore": [],
+  "Customer.store.OrderStore": [],
+  "Customer.store.SessionInfo": [],
+  "Customer.store.StoreListStore": [],
+  "Customer.store.order.OrderStore": [],
+  "Customer.store.user.AddressStore": [],
+  "Customer.store.user.UserAccountLocalStorageStore": [],
+  "Customer.store.user.UserAccountStore": [],
+  "Customer.util.Constants": [],
+  "Customer.view.CartView": [
+    "widget.cart-view"
+  ],
+  "Customer.view.CategoryView": [
+    "widget.category-view"
+  ],
+  "Customer.view.FieldGroup": [
+    "widget.fieldgroup"
+  ],
+  "Customer.view.ItemListView": [
+    "widget.item-list-view"
+  ],
+  "Customer.view.Main": [
+    "widget.mainPanel"
+  ],
+  "Customer.view.MainMenu": [],
+  "Customer.view.StoreListView": [
+    "widget.store-list"
+  ],
+  "Customer.view.Templates": [],
+  "Customer.view.cart.CartAddressView": [
+    "widget.cart-address-view"
+  ],
+  "Customer.view.cart.CartDeliverySlotView": [
+    "widget.cart-deliveryslot-view"
+  ],
+  "Customer.view.cart.CartInstructionsView": [
+    "widget.cart-instructions-view"
+  ],
+  "Customer.view.cart.CartListView": [
+    "widget.cart-list-view"
+  ],
+  "Customer.view.cart.CartPaymentView": [
+    "widget.cart-payment-view"
+  ],
+  "Customer.view.cart.CartReviewView": [
+    "widget.cart-review-view"
+  ],
+  "Customer.view.cart.CheckoutView": [
+    "widget.ordercheckout-view"
+  ],
+  "Customer.view.fgtest": [
+    "widget.fgtest"
+  ],
+  "Customer.view.item.ItemDetailView": [
+    "widget.item-detail-view"
+  ],
+  "Customer.view.item.ItemGridView": [
+    "widget.item-grid-view"
+  ],
+  "Customer.view.item.ItemSearchView": [
+    "widget.item-serch-view"
+  ],
+  "Customer.view.order.OrderDetailsView": [
+    "widget.orderdetails-view"
+  ],
+  "Customer.view.order.OrderListView": [
+    "widget.order-list"
+  ],
+  "Customer.view.user.AddressListView": [
+    "widget.addresslistitem"
+  ],
+  "Customer.view.user.AddressView": [
+    "widget.user-address"
+  ],
+  "Customer.view.user.UserAccountView": [
+    "widget.user-account"
+  ],
+  "Customer.view.user.UserForgotPasswordView": [
+    "widget.user-forgotpassword"
+  ],
+  "Customer.view.user.UserLoginView": [
+    "widget.user-Login"
+  ],
+  "Customer.view.user.UserRegistrationView": [
+    "widget.user-registration"
   ],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
@@ -1629,17 +1873,6 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.layout.wrapper.BoxDock": [],
   "Ext.layout.wrapper.Dock": [],
   "Ext.layout.wrapper.Inner": [],
-  "Ext.log.Base": [],
-  "Ext.log.Logger": [],
-  "Ext.log.filter.Filter": [],
-  "Ext.log.filter.Priority": [],
-  "Ext.log.formatter.Default": [],
-  "Ext.log.formatter.Formatter": [],
-  "Ext.log.formatter.Identity": [],
-  "Ext.log.writer.Console": [],
-  "Ext.log.writer.DocumentTitle": [],
-  "Ext.log.writer.Remote": [],
-  "Ext.log.writer.Writer": [],
   "Ext.mixin.Bindable": [],
   "Ext.mixin.Filterable": [],
   "Ext.mixin.Mixin": [],
@@ -1747,11 +1980,20 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.util.translatable.CssTransform": [],
   "Ext.util.translatable.Dom": [],
   "Ext.util.translatable.ScrollPosition": [],
+  "Ext.ux.AccordionList": [
+    "widget.accordionlist"
+  ],
+  "Ext.ux.AccordionListItem": [
+    "widget.accordionlistitem"
+  ],
   "Ext.ux.ActionOverFlowMenuButton": [],
   "Ext.ux.ApplicationMenu": [],
   "Ext.ux.ContextMenu": [],
   "Ext.ux.MenuButton": [],
   "Ext.ux.TabMenuButton": [],
+  "Ext.ux.Toast": [
+    "widget.pyo-toast"
+  ],
   "Ext.ux.device.Analytics": [],
   "Ext.ux.device.Twitter": [],
   "Ext.ux.device.analytics.Abstract": [],
@@ -1783,64 +2025,72 @@ Ext.ClassManager.addNameAliasMappings({
   "ItemListDataView": [
     "widget.itemListDataView"
   ],
+  "LineItem": [
+    "widget.lineitem"
+  ],
   "LineItems": [],
-  "Pyo.customer.controller.CageNavigationController": [],
-  "Pyo.customer.controller.CartController": [],
-  "Pyo.customer.controller.CategoryController": [],
-  "Pyo.customer.controller.ItemListController": [],
-  "Pyo.customer.controller.MainController": [],
-  "Pyo.customer.controller.MainMenuController": [],
-  "Pyo.customer.controller.OrderListController": [],
-  "Pyo.customer.controller.StoreListController": [],
-  "Pyo.customer.controller.UserLoginController": [],
-  "Pyo.customer.controller.UserRegistrationController": [],
-  "Pyo.customer.model.CartModel": [],
-  "Pyo.customer.model.CategoryModel": [],
-  "Pyo.customer.model.ItemListModel": [],
-  "Pyo.customer.model.LocationModel": [],
-  "Pyo.customer.model.OrderListModel": [],
-  "Pyo.customer.model.OrderModel": [],
-  "Pyo.customer.model.SessionModel": [],
-  "Pyo.customer.model.StoreListModel": [],
-  "Pyo.customer.model.UserLoginModel": [],
-  "Pyo.customer.model.UserRegistrationModel": [],
-  "Pyo.customer.store.CartStore": [],
-  "Pyo.customer.store.CategoryStore": [],
-  "Pyo.customer.store.ItemListStore": [],
-  "Pyo.customer.store.LocationStore": [],
-  "Pyo.customer.store.OrderListStore": [],
-  "Pyo.customer.store.OrderStore": [],
-  "Pyo.customer.store.SessionInfo": [],
-  "Pyo.customer.store.StoreListStore": [],
-  "Pyo.customer.util.Constants": [],
-  "Pyo.customer.view.CartView": [
-    "widget.cart-view"
+  "Load": [],
+  "Material.components.Button": [
+    "widget.buttonM"
   ],
-  "Pyo.customer.view.CategoryView": [
-    "widget.category-view"
+  "Material.components.Checkbox": [
+    "widget.md-checkbox"
   ],
-  "Pyo.customer.view.ItemListView": [
-    "widget.store-detail-view"
+  "Material.components.ColorPicker": [
+    "widget.ColorPicker",
+    "widget.md-ColorPicker"
   ],
-  "Pyo.customer.view.Main": [
-    "widget.main"
+  "Material.components.ColorPickerMain": [
+    "widget.md-ColorPickerMain"
   ],
-  "Pyo.customer.view.MainMenu": [],
-  "Pyo.customer.view.OrderListView": [
-    "widget.order-list"
+  "Material.components.DatePicker": [
+    "widget.md-date-picker"
   ],
-  "Pyo.customer.view.StoreListView": [
-    "widget.store-list"
+  "Material.components.Entry": [
+    "widget.md-entry"
   ],
-  "Pyo.customer.view.UserLoginView": [
-    "widget.user-Login"
+  "Material.components.List": [],
+  "Material.components.MessageBox": [],
+  "Material.components.ProgressCircular": [
+    "widget.md-progress-circular"
   ],
-  "Pyo.customer.view.UserRegistrationView": [
-    "widget.user-registration"
+  "Material.components.Slider": [
+    "widget.md-slider"
   ],
-  "Variant": []
+  "Material.components.Tab": [],
+  "Material.components.Toggle": [
+    "widget.md-toggle"
+  ],
+  "Material.components.field.DatePicker": [
+    "widget.md-datepicker"
+  ],
+  "Material.components.field.Field": [],
+  "Material.components.field.Select": [],
+  "Material.components.field.SelectPanel": [
+    "widget.select-panel"
+  ],
+  "Material.components.field.Text": [],
+  "Material.components.picker.CalendarItem": [
+    "widget.calendar-item"
+  ],
+  "Material.components.picker.DateDetailsPanel": [
+    "widget.md-date-details"
+  ],
+  "Material.components.picker.DatePickerSlot": [
+    "widget.md-date-picker-slot"
+  ],
+  "Material.helpers.Constants": [],
+  "Material.helpers.DatePickerService": [],
+  "Material.helpers.RippleService": [],
+  "OrderInnerItem": [
+    "widget.orderinneritem"
+  ],
+  "StoreDetails": [],
+  "Variant": [],
+  "customer.model.address": []
 });
 
+Ext.setVersion("Material", "1.0.0");
 
 /**
  * This file is generated by Sencha Cmd and should NOT be edited.  It is
