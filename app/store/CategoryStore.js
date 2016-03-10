@@ -44,6 +44,16 @@ var categoryData = {
       "text": "Cakes",
       "leaf": true
     }]
+  },{
+    "text": "Boutiques",
+    "items": [{
+      "text": "Men",
+      "leaf": true
+    },
+    {
+      "text": "Women",
+      "leaf": true
+    }]
   }, {
     "text": "Beverages",
     "items": [{
